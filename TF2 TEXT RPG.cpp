@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool isDead(void);
+void isDead(void);
 void setName(void);
 void setHP(void);
 void setWeapon(void);
@@ -14,6 +14,7 @@ void setXP(void);
 
 void BattleState(void);
 
+//Topic 3 shows the classes, use it for machines' array
 
 class GlobalStats
 {
@@ -21,11 +22,16 @@ public:
 
 	GlobalStats()
 	{
-		name = "Civilian";
-		HP = 75;
-		weapon = "Crowbar";
-		DMG = 25;
+		name = "default";
+		HP = 10;
+		weapon = "default weapon";
+		DMG = 5;
 		XP = 0;
+		//The 3 variables below are only used by the engineer class
+		isEngineer = false;
+		sentryHP = 10;
+		metal = 0;
+		
 		//Default values are being set in here.
 	};
 	
@@ -35,6 +41,10 @@ public:
 	int XP;
 	//Might change XP to australium when i add a story
 	int DMG;
+	bool isEngineer;
+	int sentryHP;
+	//Not sure if it would be hard but maybe I could add the ability to repair the sentry
+	int metal;
 
 protected:
 	//Will try to move them in either here or private
@@ -43,24 +53,47 @@ private:
 
 };
 
-bool isDead(void)
+void isDead(void)
 {
 	cout << "Death Message" << endl;
 	//Will add more when i get more ideas
-	return 0;
+	
 };
 
-class Mercenary
+// The 2 Classes below are Mercenary (the player) and the machines (enemies).
+
+class Mercenary : GlobalStats		// I was wondering why i couldn't access the stats inside the Mercenary Class but i forgot to link them
 {
 public:
 	Mercenary()
 	{
-		/*hp*/
+		name = "Civilian";
+		HP = 75;
+		weapon = "Crowbar";
+		DMG = 25;
+		XP = 0;
+		// isEngineer is set to true if the player picks Engineer class
+		isEngineer = false;
+		sentryHP = 10;
+		metal = 0;
 	};
 	
 
 private:
 
+};
+
+class Machines : GlobalStats
+{
+public:
+	Machines()
+	{
+		name = "dummy machine";
+		HP = 10;
+		weapon = "dummy machine weapon";
+		DMG = 5;
+
+	};
 };
 
 void ClassSelector(void) 
@@ -102,20 +135,32 @@ void BattleState(void)
 	system("CLS");
 
 };
+void isAlive(void)
+{
+	//Player HP is above 50
+}
 
 int main()
 {
+	Mercenary player;
+	/*player.name = "";*/
+	//Player using an array would make no sense, i might be wrong though.
+	Machines machines[20];
+	/*machines[0].name = "";*/
+	//the array range depends on the amount of custom machines i'll make
+
 	BattleState();
+	
 
-	while (isDead == false)
-	{
-		// Game loop will be here
+	//while (isAlive)
+	//{
+	//	 Game loop will be here
 
 
-		/*if (Mercenary.GlobalStats.HP = 0)
-		{
-
-		}*/
-	}
+	//	/*if (player.hp < 0)
+	//	{
+	//		isDead();
+	//	}*/
+	//};
 }
 
