@@ -1,0 +1,14 @@
+|**********|
+|17.03.2022|
+|**********|
+
+  |12:32|
+- Still have the issue of not being able to access the stats outside of the GlobalStats class :/
+- Trying to see if I can get some help and fix it.
+- Creating a GlobalStats objects inside the classes do not help at all because they use the default values set inside the globalStats class.
+- What I want to do instead is make them use their classess' own default stat values.
+- Ok so I got it fixed, I'll put screenshots inside the new folder to make it more clear.
+- I knew I felt like something was missing and it turns out that I forgot to make the link public.
+- class Machines(the child class) : public GlobalStats(the parent class that I wanted to link).
+- Just added public before globalStats and it fixed the issue.
+- Which also let me fix the while loop that I was trying to fix :P

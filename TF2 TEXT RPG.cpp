@@ -62,9 +62,12 @@ void isDead(void)
 
 // The 2 Classes below are Mercenary (the player) and the machines (enemies).
 
-class Mercenary : GlobalStats		// I was wondering why i couldn't access the stats inside the Mercenary Class but i forgot to link them
+class Mercenary : public GlobalStats		
 {
 public:
+	// I was wondering why i couldn't access the stats inside the Mercenary Class but i forgot to link them
+
+	/*GlobalStats playerStats;*/
 	Mercenary()
 	{
 		name = "Civilian";
@@ -83,9 +86,10 @@ private:
 
 };
 
-class Machines : GlobalStats
+class Machines : public GlobalStats
 {
 public:
+	/*GlobalStats MachineStats;*/
 	Machines()
 	{
 		name = "dummy machine";
@@ -131,7 +135,7 @@ void setXP(void)
 void BattleState(void)
 {
 	cout << "Battle Start Message" << endl;
-	Sleep(500);
+	Sleep(5000);
 	system("CLS");
 
 };
@@ -143,24 +147,46 @@ void isAlive(void)
 int main()
 {
 	Mercenary player;
-	/*player.name = "";*/
-	//Player using an array would make no sense, i might be wrong though.
 	Machines machines[20];
+	
+	//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
+
+	cout << player.name << endl;
+	//Player using an array would make no sense, i might be wrong though.
+	cout << machines[0].name << endl;
 	/*machines[0].name = "";*/
 	//the array range depends on the amount of custom machines i'll make
 
-	BattleState();
+
+
+	// FUNCTION TESTING AREA (functions are here to be tested)
+
+	/*BattleState();*/
 	
 
-	//while (isAlive)
-	//{
-	//	 Game loop will be here
+	while (player.HP > 0)
+	{
+		 //Game loop will be here
 
+		player.HP = 0;
+		//Tested the isDead function by setting the player's HP to 0.
 
-	//	/*if (player.hp < 0)
-	//	{
-	//		isDead();
-	//	}*/
-	//};
+		if (player.HP <= 0)
+		{
+			system("CLS");
+			isDead();
+			// When the player's hp goes below 0, Death function is called and etc.
+		}
+	};
 }
+
+
+//CUT STUFF
+
+//The part below was made when I was trying to fix the linking issue between the parent and child classes.
+
+/*player.playerStats.name = "";*/
+	/*cout << player.playerStats.name << endl;*/
+
+/*cout << machines[0].MachineStats.name << endl;*/
 
