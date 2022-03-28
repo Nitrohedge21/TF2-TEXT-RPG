@@ -35,21 +35,73 @@ public:
 		//Default values are being set in here.
 	};
 	
+	bool isEngineer;
+	int sentryHP;
+	//Not sure if it would be hard but maybe I could add the ability to repair the sentry
+	int metal;
+
+	string getName()
+	{
+		return name;
+	};
+
+	void setName(string _name)
+	{
+		name = _name;
+	};
+
+	int getHP()
+	{
+		return HP;
+	};
+
+	void setHP(int _HP)
+	{
+		HP = _HP;
+	};
+
+	string getWeapon()
+	{
+		return weapon;
+	};
+
+	void setWeapon(string _weapon)
+	{
+		weapon = _weapon;
+	};
+
+	int getDMG()
+	{
+		return DMG;
+	};
+
+	void setDMG(int _DMG)
+	{
+		DMG = _DMG;
+	};
+
+	int getXP()
+	{
+		return XP;
+	};
+
+	void setXP(int _XP)
+	{
+		XP = _XP;
+	};
+
+
+protected:
+	//Will try to move them in either here or private
+
+private:
 	string name;
 	int HP;
 	string weapon;
 	int XP;
 	//Might change XP to australium when i add a story
 	int DMG;
-	bool isEngineer;
-	int sentryHP;
-	//Not sure if it would be hard but maybe I could add the ability to repair the sentry
-	int metal;
-
-protected:
-	//Will try to move them in either here or private
-
-private:
+	
 
 };
 
@@ -70,17 +122,29 @@ public:
 	/*GlobalStats playerStats;*/
 	Mercenary()
 	{
-		name = "Civilian";
-		HP = 75;
-		weapon = "Crowbar";
-		DMG = 25;
-		XP = 0;
+		setName("Civilian");
+		setHP(75);
+		setWeapon("Crowbar");
+		setDMG(25);
+		setXP(0);
 		// isEngineer is set to true if the player picks Engineer class
 		isEngineer = false;
 		sentryHP = 10;
 		metal = 0;
 	};
-	
+	Mercenary(string testClass)
+	{
+		setName("test");
+		setHP(100);
+		setWeapon("testing overloaded constructors");
+		setDMG(69);
+		setXP(420);
+		isEngineer = false;
+		sentryHP = 10;
+		metal = 0;
+	}
+	// It's gonna be something like this but i'm still too far away from the thing
+	// Check overloaded contructors for the other classes instead of using setters in main
 
 private:
 
@@ -92,10 +156,10 @@ public:
 	/*GlobalStats MachineStats;*/
 	Machines()
 	{
-		name = "dummy machine";
-		HP = 10;
-		weapon = "dummy machine weapon";
-		DMG = 5;
+		setName("Dummy Machine");
+		setHP(10);
+		setWeapon("dummy machine weapon");
+		setDMG(5);
 
 	};
 };
@@ -103,11 +167,6 @@ public:
 void ClassSelector(void) 
 {
 	//Not sure whether if this is gonna be used at all since i might try to figure out how to use switch case with getters and setters instead
-};
-
-void setHP(void) 
-{
-	
 };
 
 void setDMG(void)
@@ -139,10 +198,11 @@ void BattleState(void)
 	system("CLS");
 
 };
-void isAlive(void)
-{
-	//Player HP is above 50
-}
+
+//void isAlive(void)
+//{
+//	//Player HP is above 50
+//}
 
 int main()
 {
@@ -151,9 +211,18 @@ int main()
 	
 	//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
 
-	cout << player.name << endl;
+	cout << "Name: " << player.getName() << endl;
+	cout << "HP: " << player.getHP() << endl;
+	cout << "Weapon: " << player.getWeapon() << endl;
+	cout << "DMG: " << player.getDMG() << endl;
+	cout << "XP: " << player.getXP() << endl;
 	//Player using an array would make no sense, i might be wrong though.
-	cout << machines[0].name << endl;
+
+
+	cout << "Enemy: " << machines[0].getName() << endl;
+	cout << "HP: " << machines[0].getHP() << endl;
+	cout << "Weapon: " << machines[0].getWeapon() << endl;
+	cout << "DMG: " << machines[0].getDMG() << endl;
 	/*machines[0].name = "";*/
 	//the array range depends on the amount of custom machines i'll make
 
@@ -164,14 +233,14 @@ int main()
 	/*BattleState();*/
 	
 
-	while (player.HP > 0)
+	while (player.getHP() > 0)
 	{
 		 //Game loop will be here
 
-		player.HP = 0;
+		/*player.setHP(0);*/
 		//Tested the isDead function by setting the player's HP to 0.
 
-		if (player.HP <= 0)
+		if (player.getHP() <= 0)
 		{
 			system("CLS");
 			isDead();
