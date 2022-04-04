@@ -12,3 +12,21 @@
 - class Machines(the child class) : public GlobalStats(the parent class that I wanted to link).
 - Just added public before globalStats and it fixed the issue.
 - Which also let me fix the while loop that I was trying to fix :P
+
+|**********|
+|28.03.2022|
+|**********|
+
+- Forgot to update this file the last time but check readme to see what I did.
+
+|**********|
+|04.04.2022|
+|**********|
+
+  |09:20|
+- Going to work in the university today because it's the easter break and I'm gonna be using photoshop there for another module.
+- Will work on the code too while i'm there.
+
+
+
+
