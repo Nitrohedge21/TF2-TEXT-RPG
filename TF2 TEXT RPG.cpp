@@ -2,19 +2,20 @@
 #include <string>
 #include <iostream>
 #include <time.h>
+#include <conio.h> //This one is used for the movement stuff
 
 using namespace std;
-
-void isDead(void);
-void setName(void);
-void setHP(void);
-void setWeapon(void);
-void setDMG(void);
-void setXP(void);
 
 void BattleState(void);
 
 //Topic 3 shows the classes, use it for machines' array
+
+int posX;
+int posY;
+char key_input;
+int ascii_value;
+int movement_counter;
+int getChoice;
 
 class GlobalStats
 {
@@ -39,6 +40,17 @@ public:
 	int sentryHP;
 	//Not sure if it would be hard but maybe I could add the ability to repair the sentry
 	int metal;
+
+	// THE PART BELOW NEEDS TO BE MOVED TO PRIVATE AFTER CREATING GETTERS AND SETTERS
+	
+	//I seriously can't think of how i could use primary melee and special with DMG.
+	//Special is gonna have its own thing and so is escape.
+	string primary;
+	string melee;
+	string special;		//Still thinking about this one 07.04.2022
+	string escape; //This is probably a stupid thing to do but i'm too tired to think about whether if this is the right way or not. - 07.04.2022
+	// Escaping option is gonna be just like the one in pokemon
+
 
 	string getName()
 	{
@@ -102,14 +114,13 @@ private:
 	//Might change XP to australium when i add a story
 	int DMG;
 	
-
 };
 
 void isDead(void)
 {
 	cout << "Death Message" << endl;
 	//Will add more when i get more ideas
-	
+	//Might rename it to Death Message(?) -07.04.2022
 };
 
 // The 2 Classes below are Mercenary (the player) and the machines (enemies).
@@ -132,7 +143,7 @@ public:
 		sentryHP = 10;
 		metal = 0;
 	};
-	Mercenary(string testClass)
+	/*Mercenary(string testClass)
 	{
 		setName("test");
 		setHP(100);
@@ -142,7 +153,8 @@ public:
 		isEngineer = false;
 		sentryHP = 10;
 		metal = 0;
-	}
+	}*/
+
 	// It's gonna be something like this but i'm still too far away from the thing
 	// Check overloaded contructors for the other classes instead of using setters in main
 
@@ -169,25 +181,6 @@ void ClassSelector(void)
 	//Not sure whether if this is gonna be used at all since i might try to figure out how to use switch case with getters and setters instead
 };
 
-void setDMG(void)
-{
-
-};
-
-void setWeapon(void)
-{
-
-};
-
-void setName(void)
-{
-
-};
-
-void setXP(void)
-{
-
-};
 
 //Gotta refresh my memory because i forgot how to do simple stuff
 
@@ -196,19 +189,37 @@ void BattleState(void)
 	cout << "Battle Start Message" << endl;
 	Sleep(5000);
 	system("CLS");
+	cout << "What you pickin' bruv?" << endl;
+	cin >> getChoice;
+	switch (getChoice)
+	{
+	case 1:
+		//Primary
+		break;
+	case 2:
+		//Secondary
+		break;
+	case 3:
+		//Melee
+		break;
+	case 4:
+		//Special
+		break;
+	case 5:
+		//Escape
+	default:
+		break;
+	}
+
 
 };
 
-//void isAlive(void)
-//{
-//	//Player HP is above 50
-//}
 
 int main()
 {
 	Mercenary player;
 	Machines machines[20];
-	
+
 	//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
 
 	cout << "Name: " << player.getName() << endl;
@@ -217,6 +228,8 @@ int main()
 	cout << "DMG: " << player.getDMG() << endl;
 	cout << "XP: " << player.getXP() << endl;
 	//Player using an array would make no sense, i might be wrong though.
+
+	//cout << "Primary: " << player.primary << endl;	//Trying to get it linked to DMG
 
 
 	cout << "Enemy: " << machines[0].getName() << endl;
@@ -231,14 +244,62 @@ int main()
 	// FUNCTION TESTING AREA (functions are here to be tested)
 
 	/*BattleState();*/
-	
 
+	//The main while loop that keeps the game going
 	while (player.getHP() > 0)
 	{
-		 //Game loop will be here
 
-		/*player.setHP(0);*/
-		//Tested the isDead function by setting the player's HP to 0.
+		/*while (not ((BattleState())
+		{
+
+		};*/
+
+		//Gonna put this inside another while loop so that player doesn't move while in the battle.
+		if (_getch() != NULL)
+		{
+			key_input = _getch();
+			ascii_value = key_input;
+			switch (ascii_value)
+			{
+			case 87://integer value of "W"
+				posX--;
+				movement_counter++;
+				break;
+			case 119://integer value of "w"
+				posX--;
+				movement_counter++;
+				break;
+			case 83://integer value of "S"
+				posX++;
+				movement_counter++;
+				break;
+			case 115://integer value of "s"
+				posX++;
+				movement_counter++;
+				break;
+			case 68:// integer value of "D"
+				posY++;
+				movement_counter++;
+				break;
+			case 100://integer value of "d"
+				posY++;
+				movement_counter++;
+				break;
+			case 65:// integer value of "A"
+				posY--;
+				movement_counter++;
+				break;
+			case 97:// integer value of "a"
+				posY--;
+				movement_counter++;
+				break;
+			
+			}
+		}
+		//Game loop will be here
+
+	   /*player.setHP(0);*/
+	   //Tested the isDead function by setting the player's HP to 0.
 
 		if (player.getHP() <= 0)
 		{
@@ -259,3 +320,19 @@ int main()
 
 /*cout << machines[0].MachineStats.name << endl;*/
 
+//void isAlive(void)
+//{
+//	//Player HP is above 50
+//}
+
+//The function below was pointless lmfao
+
+
+//void isDead(void);
+//void setName(void);
+//void setHP(void);
+//void setWeapon(void);
+//void setDMG(void);
+//void setXP(void);
+
+//Previous setter functions from planning phase

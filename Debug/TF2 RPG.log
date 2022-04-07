@@ -1,3 +1,3 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (TF2 RPG.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+﻿D:\Visual Studio\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (TF2 RPG.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   TF2 TEXT RPG.cpp
-  TF2 RPG.vcxproj -> D:\up2042267\TF2-TEXT-RPG\Debug\TF2 TEXT RPG.exe
+  TF2 RPG.vcxproj -> D:\GitHub\Toga RPG Game\TF2-TEXT-RPG\Debug\TF2 TEXT RPG.exe

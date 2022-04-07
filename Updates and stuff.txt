@@ -28,5 +28,17 @@
 - Will work on the code too while i'm there.
 
 
+|**********|
+|07.04.2022|
+|**********|
 
+  |23:05|
+- So that never happened. I was really busy this week with moving in and had like no time at all.
+- I've been working on it while being sleepy.
+- Did some cleaning and moved some to the cut stuff.
+- Added switch case for the incoming battlestate stuff.
+- Gonna try to figure out how i can use DMG with other stuff like primary and etc.
+- Added movement but haven't made an array yet because my eyes won't stay open :/, It has a movement counter which is gonna be a thing later on.
+- Will put that movement in a while loop so that the player doesn't move while in the battle state.
+- Commented out the testclass thingy because that is most likely not how it's supposed to be.(Not like it's working or anything :P)
 
