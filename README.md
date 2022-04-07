@@ -13,3 +13,12 @@ Stuff
 - Gonna work more on overloaded contructors.
 - Fixed getters and setters.
 - Some minor adjustments in main.
+
+07.04.2022
+Sleepy Update
+- Did some cleaning and moved some to the cut stuff.
+- Added switch case for the incoming battlestate stuff.
+- Gonna try to figure out how i can use DMG with other stuff like primary and etc.
+- Added movement but haven't made an array yet because my eyes won't stay open :/, It has a movement counter which is gonna be a thing later on.
+- I honestly don't want to keep updating this since I already have a text file for the updates but I started it so might as well keep on going.
+- ~~Totally **not** because it looks cool in the GitHub page!
