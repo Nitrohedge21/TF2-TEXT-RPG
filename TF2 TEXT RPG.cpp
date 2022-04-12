@@ -176,8 +176,45 @@ public:
 	};
 };
 
-void ClassSelector(void) 
+void ClassSelector(int _classChoice) 
 {
+	cout << "Which class would you like to choose?" << endl;
+	cout << "Scout (1), Soldier (2), Pyro (3), Demoman (4), Heavy (5), Engineer (6), Medic (7), Sniper (8), Spy (9)." << endl;
+	cin >> _classChoice;
+	switch (_classChoice)
+	{
+	case 1:
+		cout << "scout stats" << endl;
+		break;
+	case 2:
+		cout << "soldier stats" << endl;
+		break;
+	case 3:
+		cout << "pyro stats " << endl;
+		break;
+	case 4:
+		cout << "demo stats" << endl;
+		break;
+	case 5:
+		cout << "heavy stats" << endl;
+		break;
+	case 6:
+		cout << "engi stats" << endl;
+		break;
+	case 7:
+		cout << "medic stats" << endl;
+		break;
+	case 8:
+		cout << "sniper stats" << endl;
+		break;
+	case 9:
+		cout << "spy stats" << endl;
+		break;
+		
+	default:
+		ClassSelector(_classChoice);
+		break;
+	}
 	//Not sure whether if this is gonna be used at all since i might try to figure out how to use switch case with getters and setters instead
 };
 
