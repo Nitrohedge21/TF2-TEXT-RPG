@@ -22,3 +22,9 @@ Sleepy Update
 - Added movement but haven't made an array yet because my eyes won't stay open :/, It has a movement counter which is gonna be a thing later on.
 - I honestly don't want to keep updating this since I already have a text file for the updates but I started it so might as well keep on going.
 - ~~Totally **not** because it looks cool in the GitHub page!~~
+
+12.04.2022
+- Added actual map this time and movement is being displayed.
+- Classes are still not working properly, might straight up change to using setters inside switch case cases.
+- Might make switch case to use with testing functions(?)
+- ClassSelector has an infinite loop bug when an unintended input is being used for the switch case.
