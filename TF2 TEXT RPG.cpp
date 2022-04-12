@@ -9,13 +9,14 @@ using namespace std;
 void BattleState(void);
 
 //Topic 3 shows the classes, use it for machines' array
-
+const int mapSize = 20;
 int posX;
 int posY;
 char key_input;
 int ascii_value;
 int movement_counter;
 int getChoice;
+int _classChoice;
 
 class GlobalStats
 {
@@ -143,21 +144,16 @@ public:
 		sentryHP = 10;
 		metal = 0;
 	};
-	/*Mercenary(string testClass)
+	Mercenary(string _scout)
 	{
-		setName("test");
-		setHP(100);
-		setWeapon("testing overloaded constructors");
-		setDMG(69);
-		setXP(420);
-		isEngineer = false;
-		sentryHP = 10;
-		metal = 0;
-	}*/
+		setName("Scout");
+		setHP(125);
+		setWeapon("Scattergun");
+		setDMG(40);
+		setXP(0);
 
-	// It's gonna be something like this but i'm still too far away from the thing
-	// Check overloaded contructors for the other classes instead of using setters in main
-
+	}
+	
 private:
 
 };
@@ -175,16 +171,17 @@ public:
 
 	};
 };
-
-void ClassSelector(int _classChoice) 
+//I was using (int _classChoice) but couldn't get it to recognize it in main
+void ClassSelector(void) 
 {
 	cout << "Which class would you like to choose?" << endl;
 	cout << "Scout (1), Soldier (2), Pyro (3), Demoman (4), Heavy (5), Engineer (6), Medic (7), Sniper (8), Spy (9)." << endl;
-	cin >> _classChoice;
+	cin >> _classChoice;	//This part needs work to be done.
 	switch (_classChoice)
 	{
 	case 1:
 		cout << "scout stats" << endl;
+		/*Mercenary(*_scout);*/
 		break;
 	case 2:
 		cout << "soldier stats" << endl;
@@ -212,7 +209,8 @@ void ClassSelector(int _classChoice)
 		break;
 		
 	default:
-		ClassSelector(_classChoice);
+		ClassSelector();
+		//this makes an infinite loop, gonna try to figure out how I can make it not happen -12.04.2022
 		break;
 	}
 	//Not sure whether if this is gonna be used at all since i might try to figure out how to use switch case with getters and setters instead
@@ -254,8 +252,11 @@ void BattleState(void)
 
 int main()
 {
+	string map[mapSize][mapSize];
 	Mercenary player;
 	Machines machines[20];
+
+	/*ClassSelector();*/
 
 	//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
 
@@ -292,6 +293,16 @@ int main()
 		};*/
 
 		//Gonna put this inside another while loop so that player doesn't move while in the battle.
+
+		for (size_t i = 0; i < mapSize; i++)
+		{
+			for (size_t j = 0; j < mapSize; j++)
+			{
+				map[i][j] = "Nothing here";
+
+			}
+		}
+
 		if (_getch() != NULL)
 		{
 			key_input = _getch();
@@ -332,6 +343,9 @@ int main()
 				break;
 			
 			}
+			cout << "Your current position of x = " << posX << " and y = " << posY << endl;
+			cout << map[mapSize][mapSize] << endl;
+			
 		}
 		//Game loop will be here
 
@@ -373,3 +387,18 @@ int main()
 //void setXP(void);
 
 //Previous setter functions from planning phase
+
+/*Mercenary(string testClass)
+	{
+		setName("test");
+		setHP(100);
+		setWeapon("testing overloaded constructors");
+		setDMG(69);
+		setXP(420);
+		isEngineer = false;
+		sentryHP = 10;
+		metal = 0;
+	}*/
+
+// It's gonna be something like this but i'm still too far away from the thing
+// Check overloaded contructors for the other classes instead of using setters in main

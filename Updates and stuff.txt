@@ -42,3 +42,14 @@
 - Will put that movement in a while loop so that the player doesn't move while in the battle state.
 - Commented out the testclass thingy because that is most likely not how it's supposed to be.(Not like it's working or anything :P)
 
+|**********|
+|12.04.2022|
+|**********|
+
+  |19:38|
+- Added actual map this time and movement is being displayed.
+- Had to do something similar to Island Adventure made by Mehrdad(our lecturer).
+- It's 20x20 now but I'll try to ask someone to help me if it's actually possible to expand the area based on the player progress.
+- Classes are still not working properly, might straight up change to using setters inside switch case cases.
+- Might make switch case to use with testing functions(?)
+- ClassSelector has an infinite loop bug when an unintended input is being used for the switch case.
