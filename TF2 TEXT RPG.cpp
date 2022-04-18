@@ -27,7 +27,7 @@ public:
 		name = "default";
 		HP = 10;
 		weapon = "default weapon";
-		DMG = 5;
+		PrimaryDMG = 5;
 		XP = 0;
 		//The 3 variables below are only used by the engineer class
 		isEngineer = false;
@@ -46,8 +46,7 @@ public:
 	
 	//I seriously can't think of how i could use primary melee and special with DMG.
 	//Special is gonna have its own thing and so is escape.
-	string primary;
-	string melee;
+	
 	string special;		//Still thinking about this one 07.04.2022
 	string escape; //This is probably a stupid thing to do but i'm too tired to think about whether if this is the right way or not. - 07.04.2022
 	// Escaping option is gonna be just like the one in pokemon
@@ -83,14 +82,14 @@ public:
 		weapon = _weapon;
 	};
 
-	int getDMG()
+	int getPrimaryDMG()
 	{
-		return DMG;
+		return PrimaryDMG;
 	};
 
-	void setDMG(int _DMG)
+	void setPrimaryDMG(int _PrimaryDMG)
 	{
-		DMG = _DMG;
+		PrimaryDMG = _PrimaryDMG;
 	};
 
 	int getXP()
@@ -104,6 +103,7 @@ public:
 	};
 
 
+
 protected:
 	//Will try to move them in either here or private
 
@@ -111,9 +111,11 @@ private:
 	string name;
 	int HP;
 	string weapon;
+	/*string melee;*/
 	int XP;
 	//Might change XP to australium when i add a story
-	int DMG;
+	int PrimaryDMG;
+	int MeleeDMG;
 	
 };
 
@@ -126,54 +128,69 @@ void isDead(void)
 
 // The 2 Classes below are Mercenary (the player) and the machines (enemies).
 
-class Mercenary : public GlobalStats		
+class Mercenary /*: public GlobalStats*/		
 {
 public:
 	// I was wondering why i couldn't access the stats inside the Mercenary Class but i forgot to link them
 
-	/*GlobalStats playerStats;*/
+	GlobalStats playerStats;
 	Mercenary()
 	{
-		setName("Civilian");
-		setHP(75);
-		setWeapon("Crowbar");
-		setDMG(25);
-		setXP(0);
+		playerStats.setName("Civilian");
+		playerStats.setHP(75);
+		playerStats.setWeapon("Crowbar");
+		playerStats.setPrimaryDMG(25);
+		playerStats.setXP(0);
 		// isEngineer is set to true if the player picks Engineer class
-		isEngineer = false;
-		sentryHP = 10;
-		metal = 0;
+		playerStats.isEngineer = false;
+		playerStats.sentryHP = 10;
+		playerStats.metal = 0;
 	};
 	Mercenary(string _scout)
 	{
-		setName("Scout");
-		setHP(125);
-		setWeapon("Scattergun");
-		setDMG(40);
-		setXP(0);
+		playerStats.setName("Scout");
+		playerStats.setHP(125);
+		playerStats.setWeapon("Scattergun");
+		playerStats.setPrimaryDMG(40);
+		playerStats.setXP(0);
 
 	}
+	//tried using the part below but it said that the member function is already defined/declared. -18.04.2022
+
+	/*Mercenary(string _engi)
+	{
+		playerStats.setName("Engi");
+		playerStats.setHP(150);
+		playerStats.setWeapon("Shotgun");
+		playerStats.setPrimaryDMG(30);
+		playerStats.setXP(10);
+		playerStats.isEngineer = true;
+		playerStats.sentryHP = 100;
+		playerStats.metal = 50;
+	}*/
 	
 private:
 
 };
-
-class Machines : public GlobalStats
+							
+class Machines /*: public GlobalStats*/ 
 {
 public:
-	/*GlobalStats MachineStats;*/
+	GlobalStats MachineStats;
+	//Not sure whether if it's a good idea to either add public globalstats or just create a globalstats object inside -18.04.2022
 	Machines()
 	{
-		setName("Dummy Machine");
-		setHP(10);
-		setWeapon("dummy machine weapon");
-		setDMG(5);
+		MachineStats.setName("");
+		MachineStats.setHP(100);
+		MachineStats.setWeapon("dummy machine weapon");
+		MachineStats.setPrimaryDMG(5);
 
 	};
 };
 //I was using (int _classChoice) but couldn't get it to recognize it in main
 void ClassSelector(void) 
 {
+
 	cout << "Which class would you like to choose?" << endl;
 	cout << "Scout (1), Soldier (2), Pyro (3), Demoman (4), Heavy (5), Engineer (6), Medic (7), Sniper (8), Spy (9)." << endl;
 	cin >> _classChoice;	//This part needs work to be done.
@@ -181,10 +198,14 @@ void ClassSelector(void)
 	{
 	case 1:
 		cout << "scout stats" << endl;
-		/*Mercenary(*_scout);*/
+		/*Mercenary("_scout");*/
+		Mercenary("").playerStats.setName("Scout");
 		break;
 	case 2:
 		cout << "soldier stats" << endl;
+		Mercenary("").playerStats.setName("Soldier");
+		//Not working atm, prints out scout instead.
+		//setters and getters are not working either for some reason. -18.04.2022
 		break;
 	case 3:
 		cout << "pyro stats " << endl;
@@ -221,15 +242,19 @@ void ClassSelector(void)
 
 void BattleState(void)
 {
-	cout << "Battle Start Message" << endl;
-	Sleep(5000);
+	cout << "Battle Start Message!" << endl;
+	Sleep(1000);
 	system("CLS");
 	cout << "What you pickin' bruv?" << endl;
 	cin >> getChoice;
 	switch (getChoice)
 	{
 	case 1:
-		//Primary
+		/*Machines().MachineStats.setHP();
+		cout << Machines().MachineStats.getHP() << endl;*/
+
+		//The part above isn't working at all, it might have a logic error.
+		/*cout << "The machine's new hp is: " << Machines().MachineStats.getHP() << endl;*/
 		break;
 	case 2:
 		//Secondary
@@ -256,24 +281,28 @@ int main()
 	Mercenary player;
 	Machines machines[20];
 
-	/*ClassSelector();*/
+	ClassSelector();
+	//This sort of works but it displays scout's stats now because of the new constructor
+	//Now I gotta find a way to make it change depending on the classes. -18.04.2022
+	cout << Mercenary("").playerStats.getName() << endl;
+	cout << Mercenary("").playerStats.getHP() << endl;
 
 	//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
 
-	cout << "Name: " << player.getName() << endl;
-	cout << "HP: " << player.getHP() << endl;
-	cout << "Weapon: " << player.getWeapon() << endl;
-	cout << "DMG: " << player.getDMG() << endl;
-	cout << "XP: " << player.getXP() << endl;
+	/*cout << "Name: " << player.playerStats.getName() << endl;
+	cout << "HP: " << player.playerStats.getHP() << endl;
+	cout << "Weapon: " << player.playerStats.getWeapon() << endl;
+	cout << "DMG: " << player.playerStats.getPrimaryDMG() << endl;
+	cout << "XP: " << player.playerStats.getXP() << endl;*/
 	//Player using an array would make no sense, i might be wrong though.
 
 	//cout << "Primary: " << player.primary << endl;	//Trying to get it linked to DMG
 
 
-	cout << "Enemy: " << machines[0].getName() << endl;
-	cout << "HP: " << machines[0].getHP() << endl;
-	cout << "Weapon: " << machines[0].getWeapon() << endl;
-	cout << "DMG: " << machines[0].getDMG() << endl;
+	/*cout << "Enemy: " << machines[0].MachineStats.getName() << endl;
+	cout << "HP: " << machines[0].MachineStats.getHP() << endl;
+	cout << "Weapon: " << machines[0].MachineStats.getWeapon() << endl;
+	cout << "DMG: " << machines[0].MachineStats.getPrimaryDMG() << endl;*/
 	/*machines[0].name = "";*/
 	//the array range depends on the amount of custom machines i'll make
 
@@ -284,75 +313,88 @@ int main()
 	/*BattleState();*/
 
 	//The main while loop that keeps the game going
-	while (player.getHP() > 0)
+	while (player.playerStats.getHP() > 0)
 	{
 
-		/*while (not ((BattleState())
+		while (!BattleState)
 		{
+			cout << " " << endl;
 
-		};*/
+			if (_getch() != NULL)
+			{
+				key_input = _getch();
+				ascii_value = key_input;
+				switch (ascii_value)
+				{
+				case 87://integer value of "W"
+					posX--;
+					movement_counter++;
+					break;
+				case 119://integer value of "w"
+					posX--;
+					movement_counter++;
+					break;
+				case 83://integer value of "S"
+					posX++;
+					movement_counter++;
+					break;
+				case 115://integer value of "s"
+					posX++;
+					movement_counter++;
+					break;
+				case 68:// integer value of "D"
+					posY++;
+					movement_counter++;
+					break;
+				case 100://integer value of "d"
+					posY++;
+					movement_counter++;
+					break;
+				case 65:// integer value of "A"
+					posY--;
+					movement_counter++;
+					break;
+				case 97:// integer value of "a"
+					posY--;
+					movement_counter++;
+					break;
+
+				}
+				cout << "Your current position of x = " << posX << " and y = " << posY << endl;
+				/*cout << map[mapSize][mapSize] << endl;*/
+				//The mapsize thing is pointless, might cut this and the map for loop -16.04.2022
+
+			}
+
+		};
 
 		//Gonna put this inside another while loop so that player doesn't move while in the battle.
+		// Did it! I was trying to use while not which was supposed to be used like: "while (!"x state").
+		// ! turns the while loop into while not loop. -16.04.2022
 
-		for (size_t i = 0; i < mapSize; i++)
+		/*for (size_t i = 0; i < mapSize; i++)
 		{
 			for (size_t j = 0; j < mapSize; j++)
 			{
 				map[i][j] = "Nothing here";
 
 			}
-		}
+		}*/
 
-		if (_getch() != NULL)
-		{
-			key_input = _getch();
-			ascii_value = key_input;
-			switch (ascii_value)
-			{
-			case 87://integer value of "W"
-				posX--;
-				movement_counter++;
-				break;
-			case 119://integer value of "w"
-				posX--;
-				movement_counter++;
-				break;
-			case 83://integer value of "S"
-				posX++;
-				movement_counter++;
-				break;
-			case 115://integer value of "s"
-				posX++;
-				movement_counter++;
-				break;
-			case 68:// integer value of "D"
-				posY++;
-				movement_counter++;
-				break;
-			case 100://integer value of "d"
-				posY++;
-				movement_counter++;
-				break;
-			case 65:// integer value of "A"
-				posY--;
-				movement_counter++;
-				break;
-			case 97:// integer value of "a"
-				posY--;
-				movement_counter++;
-				break;
-			
-			}
-			cout << "Your current position of x = " << posX << " and y = " << posY << endl;
-			cout << map[mapSize][mapSize] << endl;
-			
-		}
+		
 		//Game loop will be here
+
+		//Testing something
+		if (posX == 69)
+		{
+			cout << "the funny number" << endl;
+			/*BattleState();*/
+		}
 
 	   /*player.setHP(0);*/
 	   //Tested the isDead function by setting the player's HP to 0.
 
-		if (player.getHP() <= 0)
+		if (player.playerStats.getHP() <= 0)
 		{
 			system("CLS");
 			isDead();
