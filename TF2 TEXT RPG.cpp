@@ -9,7 +9,7 @@ using namespace std;
 void BattleState(void);
 
 //Topic 3 shows the classes, use it for machines' array
-const int mapSize = 20;
+
 int posX;
 int posY;
 char key_input;
@@ -17,6 +17,29 @@ int ascii_value;
 int movement_counter;
 int getChoice;
 int _classChoice;
+
+class Game
+{
+public:
+	bool isOver;
+	Mercenary player;
+	Machines machines;
+
+	Game()
+	{
+		
+		/*Mercenary player;
+		Machines machines[20];*/
+
+		isOver = false;
+	}
+	
+
+private:
+
+};
+
+
 
 class GlobalStats
 {
@@ -146,28 +169,6 @@ public:
 		playerStats.sentryHP = 10;
 		playerStats.metal = 0;
 	};
-	Mercenary(string _scout)
-	{
-		playerStats.setName("Scout");
-		playerStats.setHP(125);
-		playerStats.setWeapon("Scattergun");
-		playerStats.setPrimaryDMG(40);
-		playerStats.setXP(0);
-
-	}
-	//tried using the part below but it said that the member function is already defined/declared. -18.04.2022
-
-	/*Mercenary(string _engi)
-	{
-		playerStats.setName("Engi");
-		playerStats.setHP(150);
-		playerStats.setWeapon("Shotgun");
-		playerStats.setPrimaryDMG(30);
-		playerStats.setXP(10);
-		playerStats.isEngineer = true;
-		playerStats.sentryHP = 100;
-		playerStats.metal = 50;
-	}*/
 	
 private:
 
@@ -190,6 +191,7 @@ public:
 //I was using (int _classChoice) but couldn't get it to recognize it in main
 void ClassSelector(void) 
 {
+	
 
 	cout << "Which class would you like to choose?" << endl;
 	cout << "Scout (1), Soldier (2), Pyro (3), Demoman (4), Heavy (5), Engineer (6), Medic (7), Sniper (8), Spy (9)." << endl;
@@ -198,12 +200,14 @@ void ClassSelector(void)
 	{
 	case 1:
 		cout << "scout stats" << endl;
-		/*Mercenary("_scout");*/
-		Mercenary("").playerStats.setName("Scout");
+		Mercenary().playerStats.setName("sdfajfsad");
+		cout << Mercenary().playerStats.getName() << endl;
+		/*
+		_classSelector.player.playerStats.setName("Scout");
+		cout << _classSelector.player.playerStats.getName();*/
 		break;
 	case 2:
 		cout << "soldier stats" << endl;
-		Mercenary("").playerStats.setName("Soldier");
 		//Not working atm, prints out scout instead.
 		//setters and getters are not working either for some reason. -18.04.2022
 		break;
@@ -277,16 +281,10 @@ void BattleState(void)
 
 int main()
 {
-	string map[mapSize][mapSize];
-	Mercenary player;
-	Machines machines[20];
-
+	
+	Game game;
 	ClassSelector();
-	//This sort of works but it displays scout's stats now because of the new constructor
-	//Now I gotta find a way to make it change depending on the classes. -18.04.2022
-	cout << Mercenary("").playerStats.getName() << endl;
-	cout << Mercenary("").playerStats.getHP() << endl;
-
+	
 	//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
 
 	/*cout << "Name: " << player.playerStats.getName() << endl;
@@ -313,12 +311,9 @@ int main()
 	/*BattleState();*/
 
 	//The main while loop that keeps the game going
-	while (player.playerStats.getHP() > 0)
+	while (game.isOver = false)
 	{
-
-		while (!BattleState)
-		{
-			cout << " " << endl;
+		
 
 			if (_getch() != NULL)
 			{
@@ -366,22 +361,14 @@ int main()
 
 			}
 
-		};
+		
 
 		//Gonna put this inside another while loop so that player doesn't move while in the battle.
 		// Did it! I was trying to use while not which was supposed to be used like: "while (!"x state").
 		// ! turns the while loop into while not loop. -16.04.2022
 
-		/*for (size_t i = 0; i < mapSize; i++)
-		{
-			for (size_t j = 0; j < mapSize; j++)
-			{
-				map[i][j] = "Nothing here";
+		//I was wrong about the part above because it was stopping the player from moving and it's not a good idea to have a while loop inside another. - 22.04.2022
 
-			}
-		}*/
-
-		
 		//Game loop will be here
 
 		//Testing something
@@ -394,10 +381,11 @@ int main()
 	   /*player.setHP(0);*/
 	   //Tested the isDead function by setting the player's HP to 0.
 
-		if (player.playerStats.getHP() <= 0)
+		if (Mercenary().playerStats.getHP() <= 0)
 		{
 			system("CLS");
 			isDead();
+			game.isOver = true;
 			// When the player's hp goes below 0, Death function is called and etc.
 		}
 	};
@@ -444,3 +432,55 @@ int main()
 
 // It's gonna be something like this but i'm still too far away from the thing
 // Check overloaded contructors for the other classes instead of using setters in main
+
+//This was my first try on overloaded constructor - 22.04.2022
+// 
+//tried using the part below but it said that the member function is already defined/declared. -18.04.2022
+
+	/*Mercenary(string _engi)
+	{
+		playerStats.setName("Engi");
+		playerStats.setHP(150);
+		playerStats.setWeapon("Shotgun");
+		playerStats.setPrimaryDMG(30);
+		playerStats.setXP(10);
+		playerStats.isEngineer = true;
+		playerStats.sentryHP = 100;
+		playerStats.metal = 50;
+	}*/
+
+// my second try on the constructor but i tried to call it differently-
+
+//Mercenary(string _scout)
+//{
+//	playerStats.setName("Scout");
+//	playerStats.setHP(125);
+//	playerStats.setWeapon("Scattergun");
+//	playerStats.setPrimaryDMG(40);
+//	playerStats.setXP(0);
+//
+//}
+
+// -the issue with that was;
+
+//cout << Mercenary("").playerStats.getName() << endl;
+//cout << Mercenary("").playerStats.getHP() << endl;
+
+//This sort of works but it displays scout's stats now because of the new constructor
+////Now I gotta find a way to make it change depending on the classes. -18.04.2022
+
+//so i had to scrap it. -22/04/2022
+
+
+/*for (size_t i = 0; i < mapSize; i++)
+		{
+			for (size_t j = 0; j < mapSize; j++)
+			{
+				map[i][j] = "Nothing here";
+
+			}
+		}*/
+
+//string map[mapSize][mapSize];
+
+//these were taken from island adventure but it's not required in my code.
