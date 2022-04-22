@@ -22,14 +22,19 @@ class Game
 {
 public:
 	bool isOver;
-	Mercenary player;
-	Machines machines;
+	/*Mercenary player;*/
+	/*Machines machines;*/
+	/*GlobalStats stats;*/
+	
 
 	Game()
 	{
-		
-		/*Mercenary player;
-		Machines machines[20];*/
+		//Been stuck on this part for a while. - 23.04.2022
+		//Tried using Mercenary::GlobalStats player; but it gave an error saying that mercenary is not a spacetype name or something like that :/
+
+		/*GlobalStats stats;*/
+		/*Mercenary player;*/
+		/*Machines machines[20];*/
 
 		isOver = false;
 	}
@@ -41,7 +46,7 @@ private:
 
 
 
-class GlobalStats
+class GlobalStats : public Game
 {
 public:
 
@@ -151,40 +156,54 @@ void isDead(void)
 
 // The 2 Classes below are Mercenary (the player) and the machines (enemies).
 
-class Mercenary /*: public GlobalStats*/		
+class Mercenary : public GlobalStats		
 {
 public:
 	// I was wondering why i couldn't access the stats inside the Mercenary Class but i forgot to link them
 
-	GlobalStats playerStats;
+	
 	Mercenary()
 	{
-		playerStats.setName("Civilian");
-		playerStats.setHP(75);
-		playerStats.setWeapon("Crowbar");
-		playerStats.setPrimaryDMG(25);
-		playerStats.setXP(0);
+		setName("Civilian");
+		setHP(75);
+		setWeapon("Crowbar");
+		setPrimaryDMG(25);
+		setXP(0);
 		// isEngineer is set to true if the player picks Engineer class
-		playerStats.isEngineer = false;
-		playerStats.sentryHP = 10;
-		playerStats.metal = 0;
+		isEngineer = false;
+		sentryHP = 10;
+		metal = 0;
 	};
 	
+	//GlobalStats playerStats;
+	//Mercenary()
+	//{
+	//	playerStats.setName("Civilian");
+	//	playerStats.setHP(75);
+	//	playerStats.setWeapon("Crowbar");
+	//	playerStats.setPrimaryDMG(25);
+	//	playerStats.setXP(0);
+	//	// isEngineer is set to true if the player picks Engineer class
+	//	playerStats.isEngineer = false;
+	//	playerStats.sentryHP = 10;
+	//	playerStats.metal = 0;
+	//};
+
 private:
 
 };
 							
-class Machines /*: public GlobalStats*/ 
+class Machines : public GlobalStats 
 {
 public:
-	GlobalStats MachineStats;
+	/*GlobalStats MachineStats;*/
 	//Not sure whether if it's a good idea to either add public globalstats or just create a globalstats object inside -18.04.2022
 	Machines()
 	{
-		MachineStats.setName("");
-		MachineStats.setHP(100);
-		MachineStats.setWeapon("dummy machine weapon");
-		MachineStats.setPrimaryDMG(5);
+		setName("");
+		setHP(100);
+		setWeapon("dummy machine weapon");
+		setPrimaryDMG(5);
 
 	};
 };
@@ -200,8 +219,15 @@ void ClassSelector(void)
 	{
 	case 1:
 		cout << "scout stats" << endl;
-		Mercenary().playerStats.setName("sdfajfsad");
-		cout << Mercenary().playerStats.getName() << endl;
+		cout << Mercenary().getHP() << endl;
+		Mercenary().setHP(312012842);
+		cout << Mercenary().getHP() << endl;
+		Mercenary::Mercenary().setName("scad");
+		cout << Mercenary::Mercenary().getName() << endl;
+		cout << Mercenary::Mercenary().getHP() << endl;
+		// this seems to be working but it's still not changing the player stats >:( -23.04.2022
+
+		/*Game::Game().player.setHP(4211);*/
 		/*
 		_classSelector.player.playerStats.setName("Scout");
 		cout << _classSelector.player.playerStats.getName();*/
@@ -234,7 +260,10 @@ void ClassSelector(void)
 		break;
 		
 	default:
-		ClassSelector();
+		// I feel so dumb, why did i not think of asking for input again omfg -23.04.2022
+		cout << "please choose a class that exists" << endl;
+		cin >> _classChoice;
+		/*ClassSelector();*/
 		//this makes an infinite loop, gonna try to figure out how I can make it not happen -12.04.2022
 		break;
 	}
@@ -284,6 +313,7 @@ int main()
 	
 	Game game;
 	ClassSelector();
+	/*cout << Mercenary::Mercenary().getName() << endl;*/
 	
 	//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
 
@@ -311,7 +341,7 @@ int main()
 	/*BattleState();*/
 
 	//The main while loop that keeps the game going
-	while (game.isOver = false)
+	while (game.isOver == false)
 	{
 		
 
@@ -356,8 +386,7 @@ int main()
 
 				}
 				cout << "Your current position of x = " << posX << " and y = " << posY << endl;
-				/*cout << map[mapSize][mapSize] << endl;*/
-				//The mapsize thing is pointless, might cut this and the map for loop -16.04.2022
+				
 
 			}
 
@@ -381,7 +410,7 @@ int main()
 	   /*player.setHP(0);*/
 	   //Tested the isDead function by setting the player's HP to 0.
 
-		if (Mercenary().playerStats.getHP() <= 0)
+		if (Mercenary::Mercenary().getHP() <= 0)
 		{
 			system("CLS");
 			isDead();
@@ -482,5 +511,7 @@ int main()
 		}*/
 
 //string map[mapSize][mapSize];
+/*cout << map[mapSize][mapSize] << endl;*/
+//The mapsize thing is pointless, might cut this and the map for loop -16.04.2022
 
-//these were taken from island adventure but it's not required in my code.
+//these were taken from island adventure but it's not required in my code. -22.04.2022
