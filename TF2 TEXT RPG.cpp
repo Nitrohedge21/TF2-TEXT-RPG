@@ -6,7 +6,6 @@
 
 using namespace std;
 
-void BattleState(void);
 
 //Topic 3 shows the classes, use it for machines' array
 
@@ -17,36 +16,13 @@ int ascii_value;
 int movement_counter;
 int getChoice;
 int _classChoice;
-
-class Game
-{
-public:
-	bool isOver;
-	/*Mercenary player;*/
-	/*Machines machines;*/
-	/*GlobalStats stats;*/
-	
-
-	Game()
-	{
-		//Been stuck on this part for a while. - 23.04.2022
-		//Tried using Mercenary::GlobalStats player; but it gave an error saying that mercenary is not a spacetype name or something like that :/
-
-		/*GlobalStats stats;*/
-		/*Mercenary player;*/
-		/*Machines machines[20];*/
-
-		isOver = false;
-	}
-	
-
-private:
-
-};
+int _YouSure;
 
 
 
-class GlobalStats : public Game
+
+
+class GlobalStats
 {
 public:
 
@@ -156,163 +132,212 @@ void isDead(void)
 
 // The 2 Classes below are Mercenary (the player) and the machines (enemies).
 
-class Mercenary : public GlobalStats		
+class Mercenary /*: public GlobalStats*/		
 {
 public:
 	// I was wondering why i couldn't access the stats inside the Mercenary Class but i forgot to link them
 
 	
-	Mercenary()
-	{
-		setName("Civilian");
-		setHP(75);
-		setWeapon("Crowbar");
-		setPrimaryDMG(25);
-		setXP(0);
-		// isEngineer is set to true if the player picks Engineer class
-		isEngineer = false;
-		sentryHP = 10;
-		metal = 0;
-	};
-	
-	//GlobalStats playerStats;
 	//Mercenary()
 	//{
-	//	playerStats.setName("Civilian");
-	//	playerStats.setHP(75);
-	//	playerStats.setWeapon("Crowbar");
-	//	playerStats.setPrimaryDMG(25);
-	//	playerStats.setXP(0);
+	//	setName("Civilian");
+	//	setHP(75);
+	//	setWeapon("Crowbar");
+	//	setPrimaryDMG(25);
+	//	setXP(0);
 	//	// isEngineer is set to true if the player picks Engineer class
-	//	playerStats.isEngineer = false;
-	//	playerStats.sentryHP = 10;
-	//	playerStats.metal = 0;
+	//	isEngineer = false;
+	//	sentryHP = 10;
+	//	metal = 0;
 	//};
+	
+	GlobalStats playerStats;
+	Mercenary()
+	{
+		playerStats.setName("Civilian");
+		playerStats.setHP(75);
+		playerStats.setWeapon("Crowbar");
+		playerStats.setPrimaryDMG(25);
+		playerStats.setXP(0);
+		// isEngineer is set to true if the player picks Engineer class
+		playerStats.isEngineer = false;
+		playerStats.sentryHP = 10;
+		playerStats.metal = 0;
+	};
+	
+	
 
 private:
 
 };
 							
-class Machines : public GlobalStats 
+class Machines /*: public GlobalStats */
 {
 public:
-	/*GlobalStats MachineStats;*/
+	GlobalStats MachineStats;
 	//Not sure whether if it's a good idea to either add public globalstats or just create a globalstats object inside -18.04.2022
 	Machines()
 	{
-		setName("");
-		setHP(100);
-		setWeapon("dummy machine weapon");
-		setPrimaryDMG(5);
+		MachineStats.setName("");
+		MachineStats.setHP(100);
+		MachineStats.setWeapon("dummy machine weapon");
+		MachineStats.setPrimaryDMG(5);
 
 	};
 };
+
+class Game
+{
+public:
+	bool isOver;
+	Mercenary player;
+	Machines machines[20];
+	/*GlobalStats stats;*/
+
+
+	Game()
+	{
+		isOver = false;
+	}
+
+
+private:
+
+};
+
 //I was using (int _classChoice) but couldn't get it to recognize it in main
-void ClassSelector(void) 
+void ClassSelector(Game &_game) 
 {
 	
 
 	cout << "Which class would you like to choose?" << endl;
 	cout << "Scout (1), Soldier (2), Pyro (3), Demoman (4), Heavy (5), Engineer (6), Medic (7), Sniper (8), Spy (9)." << endl;
 	cin >> _classChoice;	//This part needs work to be done.
-	switch (_classChoice)
+	cout << "Are you sure? Yes(1)/No(2)" << endl;
+	cin >> _YouSure;
+	if (_YouSure == 1)
 	{
-	case 1:
-		cout << "scout stats" << endl;
-		cout << Mercenary().getHP() << endl;
-		Mercenary().setHP(312012842);
-		cout << Mercenary().getHP() << endl;
-		Mercenary::Mercenary().setName("scad");
-		cout << Mercenary::Mercenary().getName() << endl;
-		cout << Mercenary::Mercenary().getHP() << endl;
-		// this seems to be working but it's still not changing the player stats >:( -23.04.2022
+		switch (_classChoice)
+		{
+		case 1:
+			cout << "You will now spawn as Scout." << endl;
+			Sleep(3000);
+			system("CLS");
+			_game.player.playerStats.setName("Scout");
+			_game.player.playerStats.setHP(125);
+			_game.player.playerStats.setWeapon("Scattergun");
+			_game.player.playerStats.setPrimaryDMG(25);
+			_game.player.playerStats.setXP(0);
+			
 
-		/*Game::Game().player.setHP(4211);*/
-		/*
-		_classSelector.player.playerStats.setName("Scout");
-		cout << _classSelector.player.playerStats.getName();*/
-		break;
-	case 2:
-		cout << "soldier stats" << endl;
-		//Not working atm, prints out scout instead.
-		//setters and getters are not working either for some reason. -18.04.2022
-		break;
-	case 3:
-		cout << "pyro stats " << endl;
-		break;
-	case 4:
-		cout << "demo stats" << endl;
-		break;
-	case 5:
-		cout << "heavy stats" << endl;
-		break;
-	case 6:
-		cout << "engi stats" << endl;
-		break;
-	case 7:
-		cout << "medic stats" << endl;
-		break;
-	case 8:
-		cout << "sniper stats" << endl;
-		break;
-	case 9:
-		cout << "spy stats" << endl;
-		break;
-		
-	default:
-		// I feel so dumb, why did i not think of asking for input again omfg -23.04.2022
-		cout << "please choose a class that exists" << endl;
-		cin >> _classChoice;
-		/*ClassSelector();*/
-		//this makes an infinite loop, gonna try to figure out how I can make it not happen -12.04.2022
-		break;
+			break;
+		case 2:
+			cout << "soldier stats" << endl;
+			//Not working atm, prints out scout instead.
+			//setters and getters are not working either for some reason. -18.04.2022
+			break;
+		case 3:
+			cout << "pyro stats " << endl;
+			break;
+		case 4:
+			cout << "demo stats" << endl;
+			break;
+		case 5:
+			cout << "heavy stats" << endl;
+			break;
+		case 6:
+			cout << "engi stats" << endl;
+			break;
+		case 7:
+			cout << "medic stats" << endl;
+			break;
+		case 8:
+			cout << "sniper stats" << endl;
+			break;
+		case 9:
+			cout << "spy stats" << endl;
+			break;
+
+		default:
+			// I feel so dumb, why did i not think of asking for input again omfg -23.04.2022
+			cout << "please choose a class that exists" << endl;
+			cin >> _classChoice;
+			/*ClassSelector();*/
+			//this makes an infinite loop, gonna try to figure out how I can make it not happen -12.04.2022
+			break;
+		}
 	}
+	else if (_YouSure == 2)
+	{
+		cout << "Ok then, here are the options again." << endl;
+		Sleep(3000);
+		system("CLS");
+		cout << "Which class would you like to choose?" << endl;
+		cout << "Scout (1), Soldier (2), Pyro (3), Demoman (4), Heavy (5), Engineer (6), Medic (7), Sniper (8), Spy (9)." << endl;
+		cin >> _classChoice;
+	}
+	
 	//Not sure whether if this is gonna be used at all since i might try to figure out how to use switch case with getters and setters instead
 };
 
 
 //Gotta refresh my memory because i forgot how to do simple stuff
 
-void BattleState(void)
+void BattleState(Game &_game)
 {
-	cout << "Battle Start Message!" << endl;
-	Sleep(1000);
-	system("CLS");
-	cout << "What you pickin' bruv?" << endl;
-	cin >> getChoice;
-	switch (getChoice)
+	while (_game.machines->MachineStats.getHP() > 0)
 	{
-	case 1:
-		/*Machines().MachineStats.setHP();
-		cout << Machines().MachineStats.getHP() << endl;*/
+		cout << "Battle Start Message!" << endl;
+		Sleep(1000);
+		system("CLS");
+		cout << "What you pickin' bruv?" << endl;
+		cout << "Primary(1), Secondary(2), Melee(3), Special(4), or perhaps run like a bi-(5)." << endl;
+		cin >> getChoice;
+		switch (getChoice)
+		{
+		case 1:
 
-		//The part above isn't working at all, it might have a logic error.
-		/*cout << "The machine's new hp is: " << Machines().MachineStats.getHP() << endl;*/
-		break;
-	case 2:
-		//Secondary
-		break;
-	case 3:
-		//Melee
-		break;
-	case 4:
-		//Special
-		break;
-	case 5:
-		//Escape
-	default:
-		break;
+			cout << "Machine HP:" << _game.machines->MachineStats.getHP() << endl;
+			_game.machines->MachineStats.setHP(_game.player.playerStats.getPrimaryDMG() - _game.machines->MachineStats.getHP());
+			cout << "Machine HP:" << _game.machines->MachineStats.getHP() << endl;
+
+
+			break;
+		case 2:
+			//Secondary
+			break;
+		case 3:
+			//Melee
+			break;
+		case 4:
+			//Special
+			break;
+		case 5:
+			//Escape
+		default:
+			break;
+		}
 	}
-
-
 };
+
+void HUD(Game &_game)
+{
+	cout << "Name: " << _game.player.playerStats.getName() << endl;
+	cout << "HP: " << _game.player.playerStats.getHP() << endl;
+	cout << "Weapon: " << _game.player.playerStats.getWeapon() << endl;
+	cout << "Primary DMG:  " << _game.player.playerStats.getWeapon() << endl;
+	cout << "Australium: " << _game.player.playerStats.getWeapon() << endl;
+	/*_game.player.playerStats.setWeapon("Scattergun");
+	_game.player.playerStats.setPrimaryDMG(25);
+	_game.player.playerStats.setXP(0);*/
+}
 
 
 int main()
 {
 	
 	Game game;
-	ClassSelector();
+	ClassSelector(game);
 	/*cout << Mercenary::Mercenary().getName() << endl;*/
 	
 	//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
@@ -337,14 +362,21 @@ int main()
 
 
 	// FUNCTION TESTING AREA (functions are here to be tested)
+	
 
-	/*BattleState();*/
+	while (game.machines->MachineStats.getHP() > 0)
+	{	
+		//This needs some work. The loop is broken but the game in general is fixed.
+		HUD(game);
+		BattleState(game);
+	}
+	
 
 	//The main while loop that keeps the game going
-	while (game.isOver == false)
+	while (game.isOver == false /*&& !BattleState*/)
 	{
 		
-
+		/*HUD(game);*/
 			if (_getch() != NULL)
 			{
 				key_input = _getch();
@@ -386,6 +418,7 @@ int main()
 
 				}
 				cout << "Your current position of x = " << posX << " and y = " << posY << endl;
+				system("CLS");
 				
 
 			}
@@ -410,7 +443,7 @@ int main()
 	   /*player.setHP(0);*/
 	   //Tested the isDead function by setting the player's HP to 0.
 
-		if (Mercenary::Mercenary().getHP() <= 0)
+		if (game.player.playerStats.getHP() <= 0)
 		{
 			system("CLS");
 			isDead();
@@ -515,3 +548,49 @@ int main()
 //The mapsize thing is pointless, might cut this and the map for loop -16.04.2022
 
 //these were taken from island adventure but it's not required in my code. -22.04.2022
+
+/*cout << Mercenary().Scout().playerStats.getName() << endl;
+Mercenary().Scout().playerStats.setName("testinggg");
+cout << Mercenary().Scout().playerStats.getName() << endl;*/
+
+/*Mercenary Scout()
+{
+	playerStats.setName("Scout");
+
+	return void;
+};*/
+
+//Been stuck on this part for a while. - 23.04.2022
+//Tried using Mercenary::GlobalStats player; but it gave an error saying that mercenary is not a spacetype name or something like that :/
+
+/*GlobalStats stats;
+Mercenary player;
+Machines machines[20];*/
+
+//	playerStats.setWeapon("Scattergun");
+		//	playerStats.setPrimaryDMG(40);
+		//	playerStats.setXP(0);
+
+			/*cout << Game().player.playerStats.getHP() << endl;
+			Game().player.playerStats.setHP(21481248);
+			cout << Game().player.playerStats.getHP() << endl;*/
+
+/*cout << Mercenary().playerStats.getHP() << endl;
+Mercenary().playerStats.setHP(312012842);
+cout << Mercenary().playerStats.getHP() << endl;
+Mercenary::Mercenary().playerStats.setName("scad");
+cout << Mercenary::Mercenary().playerStats.getName() << endl;
+cout << Mercenary::Mercenary().playerStats.getHP() << endl;*/
+
+// this seems to be working but it's still not changing the player stats >:( -23.04.2022
+
+//Game::Game().player.setHP(4211);
+//classSelector.player.playerStats.setName("Scout");
+//cout << _classSelector.player.playerStats.getName();
+
+/*_game.machines.playerStats.setHP(42214);*/
+		//The part above isn't working at all, it might have a logic error.
+		/*cout << "The machine's new hp is: " << Machines().MachineStats.getHP() << endl;*/
+
+//The part below is remains of the madness -23.04.2022 
+//Alexander literally saved my ass and my made day, can't thank him enough.

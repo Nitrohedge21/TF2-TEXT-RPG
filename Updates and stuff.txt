@@ -53,3 +53,13 @@
 - Classes are still not working properly, might straight up change to using setters inside switch case cases.
 - Might make switch case to use with testing functions(?)
 - ClassSelector has an infinite loop bug when an unintended input is being used for the switch case.
+
+|**********|
+|23.04.2022|
+|**********|
+
+  |21:34|
+- Cut the majority of the code because it was just like tf2's spaghetti code.
+- Alexander literally fixed the biggest issue i was having, not being able to access the game object's variables.
+- I forgot to update this notepad and the readme file but I'm most likely back to updating it regularly before the due date.
+- Still need to plan and make a script for the video.
