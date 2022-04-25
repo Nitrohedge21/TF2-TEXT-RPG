@@ -16,8 +16,8 @@ int ascii_value;
 int movement_counter;
 int getChoice;
 int _classChoice;
-int _YouSure;
-
+string _YouSure;
+bool isGoing;
 
 
 
@@ -178,7 +178,7 @@ public:
 	//Not sure whether if it's a good idea to either add public globalstats or just create a globalstats object inside -18.04.2022
 	Machines()
 	{
-		MachineStats.setName("");
+		MachineStats.setName("dummy machine name");
 		MachineStats.setHP(100);
 		MachineStats.setWeapon("dummy machine weapon");
 		MachineStats.setPrimaryDMG(5);
@@ -212,11 +212,12 @@ void ClassSelector(Game &_game)
 
 	cout << "Which class would you like to choose?" << endl;
 	cout << "Scout (1), Soldier (2), Pyro (3), Demoman (4), Heavy (5), Engineer (6), Medic (7), Sniper (8), Spy (9)." << endl;
-	cin >> _classChoice;	//This part needs work to be done.
-	cout << "Are you sure? Yes(1)/No(2)" << endl;
+	cin >> _classChoice;
+	cout << "Are you sure? Y/N" << endl;
 	cin >> _YouSure;
-	if (_YouSure == 1)
+	if (_YouSure == "Y" || _YouSure == "y")
 	{
+
 		switch (_classChoice)
 		{
 		case 1:
@@ -246,7 +247,18 @@ void ClassSelector(Game &_game)
 			cout << "heavy stats" << endl;
 			break;
 		case 6:
-			cout << "engi stats" << endl;
+			cout << "You will now spawn as Engineer." << endl;
+			Sleep(3000);
+			system("CLS");
+			_game.player.playerStats.setName("Engineer");
+			_game.player.playerStats.setHP(125);
+			_game.player.playerStats.setWeapon("Shotgun");
+			_game.player.playerStats.setPrimaryDMG(23);
+			_game.player.playerStats.setXP(0);
+			_game.player.playerStats.isEngineer = true;
+			_game.player.playerStats.sentryHP = 80;
+			_game.player.playerStats.metal = 50;
+
 			break;
 		case 7:
 			cout << "medic stats" << endl;
@@ -261,20 +273,20 @@ void ClassSelector(Game &_game)
 		default:
 			// I feel so dumb, why did i not think of asking for input again omfg -23.04.2022
 			cout << "please choose a class that exists" << endl;
-			cin >> _classChoice;
+			// not working at all. 25.04.2022
+			ClassSelector(_game);
 			/*ClassSelector();*/
 			//this makes an infinite loop, gonna try to figure out how I can make it not happen -12.04.2022
 			break;
 		}
 	}
-	else if (_YouSure == 2)
+	else if (_YouSure == "N" || _YouSure == "n")
 	{
+		system("CLS");
 		cout << "Ok then, here are the options again." << endl;
 		Sleep(3000);
 		system("CLS");
-		cout << "Which class would you like to choose?" << endl;
-		cout << "Scout (1), Soldier (2), Pyro (3), Demoman (4), Heavy (5), Engineer (6), Medic (7), Sniper (8), Spy (9)." << endl;
-		cin >> _classChoice;
+		ClassSelector(_game);
 	}
 	
 	//Not sure whether if this is gonna be used at all since i might try to figure out how to use switch case with getters and setters instead
@@ -283,54 +295,102 @@ void ClassSelector(Game &_game)
 
 //Gotta refresh my memory because i forgot how to do simple stuff
 
+void HUD(Game& _game)
+{
+	if (_game.player.playerStats.isEngineer == false)
+	{
+		cout << "Name: " << _game.player.playerStats.getName() << endl;
+		cout << "HP: " << _game.player.playerStats.getHP() << endl;
+		cout << "Weapon: " << _game.player.playerStats.getWeapon() << endl;
+		cout << "Primary DMG: " << _game.player.playerStats.getPrimaryDMG() << endl;
+		cout << "Australium: " << _game.player.playerStats.getXP() << endl;
+	}
+	
+	else
+	{
+		cout << "Name: " << _game.player.playerStats.getName() << endl;
+		cout << "HP: " << _game.player.playerStats.getHP() << endl;
+		cout << "Weapon: " << _game.player.playerStats.getWeapon() << endl;
+		cout << "Primary DMG: " << _game.player.playerStats.getPrimaryDMG() << endl;
+		cout << "Australium: " << _game.player.playerStats.getXP() << endl;
+		cout << "Sentry HP: " << _game.player.playerStats.sentryHP << endl;
+		cout << "Ammo: " << _game.player.playerStats.metal << endl;
+	}
+	
+}
+void MachinesHUD(Game& _game)
+{
+	cout << "=====================" << endl;
+	cout << "Name: " << _game.machines->MachineStats.getName() << endl;
+	cout << "HP: " << _game.machines->MachineStats.getHP() << endl;
+	cout << "Weapon: " << _game.machines->MachineStats.getWeapon() << endl;
+	cout << "Primary DMG: " << _game.machines->MachineStats.getPrimaryDMG() << endl;
+	cout << "=====================" << endl;
+}
+
 void BattleState(Game &_game)
 {
-	while (_game.machines->MachineStats.getHP() > 0)
-	{
+	isGoing = true;
+
 		cout << "Battle Start Message!" << endl;
 		Sleep(1000);
 		system("CLS");
-		cout << "What you pickin' bruv?" << endl;
-		cout << "Primary(1), Secondary(2), Melee(3), Special(4), or perhaps run like a bi-(5)." << endl;
-		cin >> getChoice;
-		switch (getChoice)
+		while (_game.machines->MachineStats.getHP() > 0)
 		{
-		case 1:
+			HUD(_game);
+			MachinesHUD(_game);
+			cout << "What you pickin' bruv?" << endl;
+			cout << "Primary(1), Secondary(2), Melee(3), Special(4), or perhaps run like a bi-(5)." << endl;
+			cin >> getChoice;
+			switch (getChoice)
+			{
+			case 1:
+				system("CLS");
+				HUD(_game);
+				MachinesHUD(_game);
+				if (_game.machines->MachineStats.getHP() > 0)
+				{
+					
+					_game.machines->MachineStats.setHP(_game.player.playerStats.getPrimaryDMG() - _game.machines->MachineStats.getHP());
+					cout << "You attacked with your " << _game.player.playerStats.getWeapon() << "!" << endl;
+					/*Sleep(2000);
+					system("CLS");*/
 
-			cout << "Machine HP:" << _game.machines->MachineStats.getHP() << endl;
-			_game.machines->MachineStats.setHP(_game.player.playerStats.getPrimaryDMG() - _game.machines->MachineStats.getHP());
-			cout << "Machine HP:" << _game.machines->MachineStats.getHP() << endl;
+					
 
+				}
+				//make a battle hud function?? -23.04.2022
 
-			break;
-		case 2:
-			//Secondary
-			break;
-		case 3:
-			//Melee
-			break;
-		case 4:
-			//Special
-			break;
-		case 5:
-			//Escape
-		default:
-			break;
+				else
+				{
+					cout << "You beat the " << _game.machines->MachineStats.getName() << "!" << endl;
+				}
+
+				break;
+			case 2:
+				//Secondary
+				break;
+			case 3:
+				//Melee
+				break;
+			case 4:
+				//Special
+				break;
+			case 5:
+				//Escape
+			default:
+				break;
+			}
+			if (_game.machines->MachineStats.getHP() >= 0)
+			{
+				isGoing = false;
+			}
 		}
-	}
+		
+	
 };
 
-void HUD(Game &_game)
-{
-	cout << "Name: " << _game.player.playerStats.getName() << endl;
-	cout << "HP: " << _game.player.playerStats.getHP() << endl;
-	cout << "Weapon: " << _game.player.playerStats.getWeapon() << endl;
-	cout << "Primary DMG:  " << _game.player.playerStats.getWeapon() << endl;
-	cout << "Australium: " << _game.player.playerStats.getWeapon() << endl;
-	/*_game.player.playerStats.setWeapon("Scattergun");
-	_game.player.playerStats.setPrimaryDMG(25);
-	_game.player.playerStats.setXP(0);*/
-}
+
 
 
 int main()
@@ -417,8 +477,9 @@ int main()
 					break;
 
 				}
-				cout << "Your current position of x = " << posX << " and y = " << posY << endl;
 				system("CLS");
+				cout << "Your current position of x = " << posX << " and y = " << posY << endl;
+				
 				
 
 			}
