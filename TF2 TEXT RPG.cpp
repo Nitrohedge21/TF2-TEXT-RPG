@@ -3,6 +3,10 @@
 #include <iostream>
 #include <time.h>
 #include <conio.h> //This one is used for the movement stuff
+#include "GlobalStats.h"
+#include "Mercenary.h"
+#include "Machines.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -19,152 +23,6 @@ int _classChoice;
 string _YouSure;
 bool isGoing;
 
-
-
-
-class GlobalStats
-{
-public:
-
-	GlobalStats()
-	{
-		name = "default";
-		HP = 10;
-		weapon = "default weapon";
-		PrimaryDMG = 5;
-		XP = 0;
-		//The 3 variables below are only used by the engineer class
-		isEngineer = false;
-		sentryHP = 10;
-		metal = 0;
-		
-		//Default values are being set in here.
-	};
-	
-	bool isEngineer;
-	int sentryHP;
-	//Not sure if it would be hard but maybe I could add the ability to repair the sentry
-	int metal;
-
-	// THE PART BELOW NEEDS TO BE MOVED TO PRIVATE AFTER CREATING GETTERS AND SETTERS
-	
-	//I seriously can't think of how i could use primary melee and special with DMG.
-	//Special is gonna have its own thing and so is escape.
-	
-	string special;		//Still thinking about this one 07.04.2022
-	string escape; //This is probably a stupid thing to do but i'm too tired to think about whether if this is the right way or not. - 07.04.2022
-	// Escaping option is gonna be just like the one in pokemon
-
-
-	string getName()
-	{
-		return name;
-	};
-
-	void setName(string _name)
-	{
-		name = _name;
-	};
-
-	int getHP()
-	{
-		return HP;
-	};
-
-	void setHP(int _HP)
-	{
-		HP = _HP;
-	};
-
-	string getWeapon()
-	{
-		return weapon;
-	};
-
-	void setWeapon(string _weapon)
-	{
-		weapon = _weapon;
-	};
-
-	string getSecondary()
-	{
-		return secondary;
-	};
-
-	void setSecondary(string _secondary)
-	{
-		secondary = _secondary;
-	};
-
-	string getMelee()
-	{
-		return melee;
-	};
-
-	void setMelee(string _melee)
-	{
-		melee = _melee;
-	};
-
-	int getPrimaryDMG()
-	{
-		return PrimaryDMG;
-	};
-
-	void setPrimaryDMG(int _PrimaryDMG)
-	{
-		PrimaryDMG = _PrimaryDMG;
-	};
-
-	int getSecondaryDMG()
-	{
-		return SecondaryDMG;
-	};
-
-	void setSecondaryDMG(int _SecondaryDMG)
-	{
-		SecondaryDMG = _SecondaryDMG;
-	};
-
-	int getMeleeDMG()
-	{
-		return MeleeDMG;
-	};
-
-	void setMeleeDMG(int _MeleeDMG)
-	{
-		MeleeDMG = _MeleeDMG;
-	};
-
-	int getXP()
-	{
-		return XP;
-	};
-
-	void setXP(int _XP)
-	{
-		XP = _XP;
-	};
-
-
-
-protected:
-	//Will try to move them in either here or private
-
-private:
-	string name;
-	int HP;
-	string weapon;
-	string secondary;
-	string melee;
-	int XP;
-	//Might change XP to australium when i add a story
-	int PrimaryDMG;
-	int SecondaryDMG;
-	int MeleeDMG;
-	
-};
-
 void isDead(void)
 {
 	cout << "Death Message" << endl;
@@ -172,71 +30,6 @@ void isDead(void)
 	//Might rename it to Death Message(?) -07.04.2022
 };
 
-// The 2 Classes below are Mercenary (the player) and the machines (enemies).
-
-class Mercenary 		
-{
-public:
-	
-	GlobalStats playerStats;
-	Mercenary()
-	{
-		playerStats.setName("Civilian");
-		playerStats.setHP(75);
-		playerStats.setWeapon("Default Primary");
-		playerStats.setPrimaryDMG(40);
-		playerStats.setSecondary("Default Secondary");
-		playerStats.setSecondaryDMG(20);
-		playerStats.setMelee("Crowbar");
-		playerStats.setMeleeDMG(25);
-
-		playerStats.setXP(0);
-		// isEngineer is set to true if the player picks Engineer class
-		playerStats.isEngineer = false;
-		playerStats.sentryHP = 10;
-		playerStats.metal = 0;
-	};
-	
-	
-
-private:
-
-};
-							
-class Machines 
-{
-public:
-	GlobalStats MachineStats;
-	//Not sure whether if it's a good idea to either add public globalstats or just create a globalstats object inside -18.04.2022
-	Machines()
-	{
-		MachineStats.setName("dummy machine name");
-		MachineStats.setHP(100);
-		MachineStats.setWeapon("dummy machine weapon");
-		MachineStats.setPrimaryDMG(5);
-
-	};
-};
-
-class Game
-{
-public:
-	bool isOver;
-	Mercenary player;
-	Machines machines[20];
-
-
-	Game()
-	{
-		isOver = false;
-	}
-
-
-private:
-
-};
-
-//I was using (int _classChoice) but couldn't get it to recognize it in main
 void ClassSelector(Game &_game) 
 {
 	cout << "Now..." << endl;
@@ -259,7 +52,7 @@ void ClassSelector(Game &_game)
 			_game.player.playerStats.setHP(125);
 			_game.player.playerStats.setWeapon("Scattergun");
 			_game.player.playerStats.setPrimaryDMG(25);
-			_game.player.playerStats.setSecondary("Default Secondary");
+			_game.player.playerStats.setSecondary("Pistol");
 			_game.player.playerStats.setSecondaryDMG(20);
 			_game.player.playerStats.setMelee("Bat");
 			_game.player.playerStats.setMeleeDMG(5);
@@ -273,7 +66,7 @@ void ClassSelector(Game &_game)
 			_game.player.playerStats.setHP(200);
 			_game.player.playerStats.setWeapon("Rocket Launcher");
 			_game.player.playerStats.setPrimaryDMG(40);
-			_game.player.playerStats.setSecondary("Default Secondary");
+			_game.player.playerStats.setSecondary("Shotgun");
 			_game.player.playerStats.setSecondaryDMG(20);
 			_game.player.playerStats.setMelee("Shovel");
 			_game.player.playerStats.setMeleeDMG(10);
@@ -287,7 +80,7 @@ void ClassSelector(Game &_game)
 			_game.player.playerStats.setHP(175);
 			_game.player.playerStats.setWeapon("Flamethrower");
 			_game.player.playerStats.setPrimaryDMG(40);
-			_game.player.playerStats.setSecondary("Default Secondary");
+			_game.player.playerStats.setSecondary("Shotgun");
 			_game.player.playerStats.setSecondaryDMG(20);
 			_game.player.playerStats.setMelee("Fireaxe");
 			_game.player.playerStats.setMeleeDMG(8);
@@ -301,7 +94,7 @@ void ClassSelector(Game &_game)
 			_game.player.playerStats.setHP(175);
 			_game.player.playerStats.setWeapon("Grenade Launcher");
 			_game.player.playerStats.setPrimaryDMG(40);
-			_game.player.playerStats.setSecondary("Default Secondary");
+			_game.player.playerStats.setSecondary("Stickybomb Launcher");
 			_game.player.playerStats.setSecondaryDMG(20);
 			_game.player.playerStats.setMelee("Bottle");
 			_game.player.playerStats.setMeleeDMG(9);
@@ -315,7 +108,7 @@ void ClassSelector(Game &_game)
 			_game.player.playerStats.setHP(175);
 			_game.player.playerStats.setWeapon("Minigun");
 			_game.player.playerStats.setPrimaryDMG(40);
-			_game.player.playerStats.setSecondary("Default Secondary");
+			_game.player.playerStats.setSecondary("Shotgun");
 			_game.player.playerStats.setSecondaryDMG(20);
 			_game.player.playerStats.setMelee("Fist");
 			_game.player.playerStats.setMeleeDMG(13);
@@ -398,9 +191,16 @@ void ClassSelector(Game &_game)
 		Sleep(3000);
 		system("CLS");
 		ClassSelector(_game);
+
+		//The part below is useless at the moment but I want to make it so that it doesn't go for the default value when the
+		//user input differs from the choices. - 30.04.2022
+		/*if (_YouSure != "N" || _YouSure == "n")
+		{
+
+		}*/
 	}
 	
-	//Not sure whether if this is gonna be used at all since i might try to figure out how to use switch case with getters and setters instead
+	
 };
 
 
@@ -475,8 +275,6 @@ void BattleState(Game &_game)
 					cin >> getChoice;
 					//this part still isn't working >:( -30.04.2022
 
-					
-
 				}
 				
 				break;
@@ -515,6 +313,25 @@ void BattleState(Game &_game)
 				break;
 			case 5:
 				//Escape
+				if ((rand() % 3) == 1) 
+				{
+					
+					cout << "You couldn't run away!" << endl;
+					cout << "And because of that, your enemy had the chance to attack you in the meantime!" << endl;
+					_game.player.playerStats.setHP(_game.player.playerStats.getHP() - _game.machines->MachineStats.getPrimaryDMG());
+					Sleep(2000);
+					system("CLS");
+					BattleState(_game);
+
+				}
+				else {
+					cout << "You escaped succesfully..." << endl;
+					cout << "But at what cost?" << endl;
+					Sleep(2000);
+					system("CLS");
+				}
+
+				cout << "Administrator: You were ALWAYS a disappointment..." << endl;
 			default:
 				break;
 			}
@@ -522,6 +339,8 @@ void BattleState(Game &_game)
 			{
 				isGoing = false;
 				cout << "You beat " << _game.machines->MachineStats.getName() << "!" << endl;
+				/*cout << "You won " << rand() % 10 - 20 << " australium from that battle!" << endl;*/
+				//Not sure about the part above, gonna ask charlie in the workshop. -30.04.2022
 			}
 		}
 		
@@ -590,12 +409,18 @@ int main()
 	
 	// FUNCTION TESTING AREA (functions are here to be tested)
 	
+	if (movement_counter > 5)
+	{
+		//Randomizer to make it so that player is able to encounter enemies after a few moves.
+		//Not really familiar with rand, gonna need help. -30.04.2022
+	}
+	/*BattleState(game);*/
 
-	while (game.machines->MachineStats.getHP() > 0)
+	/*while (game.machines[0].MachineStats.getHP() > 0)
 	{	
 		BattleState(game);
-	}
-	
+	}*/
+	 // Seriously don't even know what I was thinking when I wrote the part above. 30.04.2022
 
 	//The main while loop that keeps the game going
 	while (game.isOver == false /*&& !BattleState*/)
@@ -644,6 +469,7 @@ int main()
 
 				}
 				system("CLS");
+				HUD(game);
 				cout << "Your current position of x = " << posX << " and y = " << posY << endl;
 				ProgressCheck10(game);
 

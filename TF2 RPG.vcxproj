@@ -140,10 +140,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GlobalStats.cpp" />
+    <ClCompile Include="Machines.cpp" />
+    <ClCompile Include="Mercenary.cpp" />
     <ClCompile Include="TF2 TEXT RPG.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GlobalStats.h" />
+    <ClInclude Include="Machines.h" />
+    <ClInclude Include="Mercenary.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
