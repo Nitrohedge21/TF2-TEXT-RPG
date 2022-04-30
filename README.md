@@ -41,3 +41,10 @@ Sleepy Update
 - Made a progress checker function so that player doesn't go out of bounds, although it's not working as intended.
 - Made story and welcoming message functions. Story isn't done yet, just trying to complete the game atm.
 - Added secondary and melee attacks.
+
+30.04.2022 v2
+- Seperated the files sucessfully, had to remove some of the stuff from the header files.
+- Added escaping option to the Battle State.
+- Player has one in three chance to escape.
+- Switched machines to arrays because that was what I initially had in mind.
+- Although, the preset machine types are not getting detected for some reason, it copies the default values from GlobalStats.
