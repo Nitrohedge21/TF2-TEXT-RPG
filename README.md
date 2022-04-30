@@ -35,3 +35,9 @@ Sleepy Update
 - Alexander (one of the module mates) literally fixed the biggest issue i was having, not being able to access the game object's variables.
 - Now I can edit the values of the classes again, Hooray!!! 🥳
 
+30.04.2022
+- Tried seperating the files but got messed up with a shit ton of errors, gonna get some help in the next workshop.
+- Added all the classes' stats.
+- Made a progress checker function so that player doesn't go out of bounds, although it's not working as intended.
+- Made story and welcoming message functions. Story isn't done yet, just trying to complete the game atm.
+- Added secondary and melee attacks.
