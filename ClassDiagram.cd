@@ -1,21 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="GlobalStats">
-    <Position X="8" Y="0.75" Width="1.5" />
+    <Position X="7" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>IAAAAAAEAAABABSABAEACAAASABEAABABABEIEACBAA=</HashCode>
       <FileName>TF2 TEXT RPG.cpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Mercenary">
-    <Position X="5.5" Y="1.75" Width="1.5" />
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
       <FileName>TF2 TEXT RPG.cpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Machines">
-    <Position X="3.75" Y="1.75" Width="1.5" />
+    <Position X="3.5" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TF2 TEXT RPG.cpp</FileName>
@@ -23,6 +32,9 @@
   </Class>
   <Class Name="Game">
     <Position X="1.75" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAgAAAABAAAAAIAAAAA=</HashCode>
       <FileName>TF2 TEXT RPG.cpp</FileName>

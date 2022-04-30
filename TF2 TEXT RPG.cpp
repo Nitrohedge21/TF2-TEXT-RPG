@@ -86,6 +86,26 @@ public:
 		weapon = _weapon;
 	};
 
+	string getSecondary()
+	{
+		return secondary;
+	};
+
+	void setSecondary(string _secondary)
+	{
+		secondary = _secondary;
+	};
+
+	string getMelee()
+	{
+		return melee;
+	};
+
+	void setMelee(string _melee)
+	{
+		melee = _melee;
+	};
+
 	int getPrimaryDMG()
 	{
 		return PrimaryDMG;
@@ -94,6 +114,26 @@ public:
 	void setPrimaryDMG(int _PrimaryDMG)
 	{
 		PrimaryDMG = _PrimaryDMG;
+	};
+
+	int getSecondaryDMG()
+	{
+		return SecondaryDMG;
+	};
+
+	void setSecondaryDMG(int _SecondaryDMG)
+	{
+		SecondaryDMG = _SecondaryDMG;
+	};
+
+	int getMeleeDMG()
+	{
+		return MeleeDMG;
+	};
+
+	void setMeleeDMG(int _MeleeDMG)
+	{
+		MeleeDMG = _MeleeDMG;
 	};
 
 	int getXP()
@@ -115,10 +155,12 @@ private:
 	string name;
 	int HP;
 	string weapon;
-	/*string melee;*/
+	string secondary;
+	string melee;
 	int XP;
 	//Might change XP to australium when i add a story
 	int PrimaryDMG;
+	int SecondaryDMG;
 	int MeleeDMG;
 	
 };
@@ -132,32 +174,22 @@ void isDead(void)
 
 // The 2 Classes below are Mercenary (the player) and the machines (enemies).
 
-class Mercenary /*: public GlobalStats*/		
+class Mercenary 		
 {
 public:
-	// I was wondering why i couldn't access the stats inside the Mercenary Class but i forgot to link them
-
-	
-	//Mercenary()
-	//{
-	//	setName("Civilian");
-	//	setHP(75);
-	//	setWeapon("Crowbar");
-	//	setPrimaryDMG(25);
-	//	setXP(0);
-	//	// isEngineer is set to true if the player picks Engineer class
-	//	isEngineer = false;
-	//	sentryHP = 10;
-	//	metal = 0;
-	//};
 	
 	GlobalStats playerStats;
 	Mercenary()
 	{
 		playerStats.setName("Civilian");
 		playerStats.setHP(75);
-		playerStats.setWeapon("Crowbar");
-		playerStats.setPrimaryDMG(25);
+		playerStats.setWeapon("Default Primary");
+		playerStats.setPrimaryDMG(40);
+		playerStats.setSecondary("Default Secondary");
+		playerStats.setSecondaryDMG(20);
+		playerStats.setMelee("Crowbar");
+		playerStats.setMeleeDMG(25);
+
 		playerStats.setXP(0);
 		// isEngineer is set to true if the player picks Engineer class
 		playerStats.isEngineer = false;
@@ -171,7 +203,7 @@ private:
 
 };
 							
-class Machines /*: public GlobalStats */
+class Machines 
 {
 public:
 	GlobalStats MachineStats;
@@ -192,7 +224,6 @@ public:
 	bool isOver;
 	Mercenary player;
 	Machines machines[20];
-	/*GlobalStats stats;*/
 
 
 	Game()
@@ -208,8 +239,8 @@ private:
 //I was using (int _classChoice) but couldn't get it to recognize it in main
 void ClassSelector(Game &_game) 
 {
-	
-
+	cout << "Now..." << endl;
+	Sleep(2000);
 	cout << "Which class would you like to choose?" << endl;
 	cout << "Scout (1), Soldier (2), Pyro (3), Demoman (4), Heavy (5), Engineer (6), Medic (7), Sniper (8), Spy (9)." << endl;
 	cin >> _classChoice;
@@ -228,23 +259,67 @@ void ClassSelector(Game &_game)
 			_game.player.playerStats.setHP(125);
 			_game.player.playerStats.setWeapon("Scattergun");
 			_game.player.playerStats.setPrimaryDMG(25);
+			_game.player.playerStats.setSecondary("Default Secondary");
+			_game.player.playerStats.setSecondaryDMG(20);
+			_game.player.playerStats.setMelee("Bat");
+			_game.player.playerStats.setMeleeDMG(5);
 			_game.player.playerStats.setXP(0);
-			
-
 			break;
 		case 2:
-			cout << "soldier stats" << endl;
-			//Not working atm, prints out scout instead.
-			//setters and getters are not working either for some reason. -18.04.2022
+			cout << "You will now spawn as Soldier." << endl;
+			Sleep(3000);
+			system("CLS");
+			_game.player.playerStats.setName("Soldier");
+			_game.player.playerStats.setHP(200);
+			_game.player.playerStats.setWeapon("Rocket Launcher");
+			_game.player.playerStats.setPrimaryDMG(40);
+			_game.player.playerStats.setSecondary("Default Secondary");
+			_game.player.playerStats.setSecondaryDMG(20);
+			_game.player.playerStats.setMelee("Shovel");
+			_game.player.playerStats.setMeleeDMG(10);
+			_game.player.playerStats.setXP(0);
 			break;
 		case 3:
-			cout << "pyro stats " << endl;
+			cout << "You will now spawn as Pyro." << endl;
+			Sleep(3000);
+			system("CLS");
+			_game.player.playerStats.setName("Pyro");
+			_game.player.playerStats.setHP(175);
+			_game.player.playerStats.setWeapon("Flamethrower");
+			_game.player.playerStats.setPrimaryDMG(40);
+			_game.player.playerStats.setSecondary("Default Secondary");
+			_game.player.playerStats.setSecondaryDMG(20);
+			_game.player.playerStats.setMelee("Fireaxe");
+			_game.player.playerStats.setMeleeDMG(8);
+			_game.player.playerStats.setXP(0);
 			break;
 		case 4:
-			cout << "demo stats" << endl;
+			cout << "You will now spawn as Demoman." << endl;
+			Sleep(3000);
+			system("CLS");
+			_game.player.playerStats.setName("Demoman");
+			_game.player.playerStats.setHP(175);
+			_game.player.playerStats.setWeapon("Grenade Launcher");
+			_game.player.playerStats.setPrimaryDMG(40);
+			_game.player.playerStats.setSecondary("Default Secondary");
+			_game.player.playerStats.setSecondaryDMG(20);
+			_game.player.playerStats.setMelee("Bottle");
+			_game.player.playerStats.setMeleeDMG(9);
+			_game.player.playerStats.setXP(0);
 			break;
 		case 5:
-			cout << "heavy stats" << endl;
+			cout << "You will now spawn as Heavy." << endl;
+			Sleep(3000);
+			system("CLS");
+			_game.player.playerStats.setName("Heavy");
+			_game.player.playerStats.setHP(175);
+			_game.player.playerStats.setWeapon("Minigun");
+			_game.player.playerStats.setPrimaryDMG(40);
+			_game.player.playerStats.setSecondary("Default Secondary");
+			_game.player.playerStats.setSecondaryDMG(20);
+			_game.player.playerStats.setMelee("Fist");
+			_game.player.playerStats.setMeleeDMG(13);
+			_game.player.playerStats.setXP(0);
 			break;
 		case 6:
 			cout << "You will now spawn as Engineer." << endl;
@@ -254,20 +329,56 @@ void ClassSelector(Game &_game)
 			_game.player.playerStats.setHP(125);
 			_game.player.playerStats.setWeapon("Shotgun");
 			_game.player.playerStats.setPrimaryDMG(23);
+			//Engineer shouldn't have that many attacks, he has sentry already.
+			//So i won't be adding secondary to him. -30.04.2022
+			_game.player.playerStats.setMelee("Wrench");
+			_game.player.playerStats.setMeleeDMG(8);
 			_game.player.playerStats.setXP(0);
 			_game.player.playerStats.isEngineer = true;
 			_game.player.playerStats.sentryHP = 80;
 			_game.player.playerStats.metal = 50;
-
 			break;
 		case 7:
-			cout << "medic stats" << endl;
+			cout << "You will now spawn as Medic." << endl;
+			Sleep(3000);
+			system("CLS");
+			_game.player.playerStats.setName("Medic");
+			_game.player.playerStats.setHP(150);
+			_game.player.playerStats.setWeapon("Syringe Gun");
+			_game.player.playerStats.setPrimaryDMG(40);
+			//Honestly don't know what to do for medic's secondary.
+			_game.player.playerStats.setMelee("Bonesaw");
+			_game.player.playerStats.setMeleeDMG(7);
+			_game.player.playerStats.setXP(0);
 			break;
 		case 8:
-			cout << "sniper stats" << endl;
+			cout << "You will now spawn as Sniper." << endl;
+			Sleep(3000);
+			system("CLS");
+			_game.player.playerStats.setName("Sniper");
+			_game.player.playerStats.setHP(125);
+			_game.player.playerStats.setWeapon("Sniper Rifle");
+			_game.player.playerStats.setPrimaryDMG(40);
+			_game.player.playerStats.setSecondary("SMG");
+			_game.player.playerStats.setSecondaryDMG(20);
+			_game.player.playerStats.setMelee("Kukri");
+			_game.player.playerStats.setMeleeDMG(8);
+			_game.player.playerStats.setXP(0);
 			break;
 		case 9:
-			cout << "spy stats" << endl;
+			cout << "You will now spawn as Spy." << endl;
+			Sleep(3000);
+			system("CLS");
+			_game.player.playerStats.setName("Spy");
+			_game.player.playerStats.setHP(125);
+			_game.player.playerStats.setWeapon("Revolver");
+			_game.player.playerStats.setPrimaryDMG(40);
+			_game.player.playerStats.setSecondary("Sapper");
+			_game.player.playerStats.setSecondaryDMG(10);
+			//Thinking about a way to stop the enemy from attacking for a round when this attack is used. -30.04.2022
+			_game.player.playerStats.setMelee("Knife");
+			_game.player.playerStats.setMeleeDMG(12);
+			_game.player.playerStats.setXP(0);
 			break;
 
 		default:
@@ -303,6 +414,10 @@ void HUD(Game& _game)
 		cout << "HP: " << _game.player.playerStats.getHP() << endl;
 		cout << "Weapon: " << _game.player.playerStats.getWeapon() << endl;
 		cout << "Primary DMG: " << _game.player.playerStats.getPrimaryDMG() << endl;
+		cout << "Secondary: " << _game.player.playerStats.getSecondary() << endl;
+		cout << "Secondary DMG: " << _game.player.playerStats.getSecondaryDMG() << endl;
+		cout << "Melee: " << _game.player.playerStats.getMelee() << endl;
+		cout << "Melee DMG: " << _game.player.playerStats.getMeleeDMG() << endl;
 		cout << "Australium: " << _game.player.playerStats.getXP() << endl;
 	}
 	
@@ -312,6 +427,8 @@ void HUD(Game& _game)
 		cout << "HP: " << _game.player.playerStats.getHP() << endl;
 		cout << "Weapon: " << _game.player.playerStats.getWeapon() << endl;
 		cout << "Primary DMG: " << _game.player.playerStats.getPrimaryDMG() << endl;
+		cout << "Melee: " << _game.player.playerStats.getMelee() << endl;
+		cout << "Melee DMG: " << _game.player.playerStats.getMeleeDMG() << endl;
 		cout << "Australium: " << _game.player.playerStats.getXP() << endl;
 		cout << "Sentry HP: " << _game.player.playerStats.sentryHP << endl;
 		cout << "Ammo: " << _game.player.playerStats.metal << endl;
@@ -332,19 +449,20 @@ void BattleState(Game &_game)
 {
 	isGoing = true;
 
-		cout << "Battle Start Message!" << endl;
-		Sleep(1000);
-		system("CLS");
+		/*cout << "Battle Start Message!" << endl;*/
+		/*Sleep(1000);
+		system("CLS");*/
 		while (_game.machines->MachineStats.getHP() > 0)
 		{
 			HUD(_game);
 			MachinesHUD(_game);
-			cout << "What you pickin' bruv?" << endl;
+			cout << "How are you going to attack?" << endl;
 			cout << "Primary(1), Secondary(2), Melee(3), Special(4), or perhaps run like a bi-(5)." << endl;
 			cin >> getChoice;
 			switch (getChoice)
 			{
 			case 1:
+				//Primary
 				system("CLS");
 				HUD(_game);
 				MachinesHUD(_game);
@@ -353,25 +471,44 @@ void BattleState(Game &_game)
 					
 					_game.machines->MachineStats.setHP(_game.player.playerStats.getPrimaryDMG() - _game.machines->MachineStats.getHP());
 					cout << "You attacked with your " << _game.player.playerStats.getWeapon() << "!" << endl;
-					/*Sleep(2000);
-					system("CLS");*/
+					BattleState(_game);
+					cin >> getChoice;
+					//this part still isn't working >:( -30.04.2022
 
 					
 
 				}
-				//make a battle hud function?? -23.04.2022
-
-				else
-				{
-					cout << "You beat the " << _game.machines->MachineStats.getName() << "!" << endl;
-				}
-
+				
 				break;
 			case 2:
 				//Secondary
+				system("CLS");
+				HUD(_game);
+				MachinesHUD(_game);
+				if (_game.machines->MachineStats.getHP() > 0)
+				{
+
+					_game.machines->MachineStats.setHP(_game.player.playerStats.getSecondaryDMG() - _game.machines->MachineStats.getHP());
+					cout << "You attacked with your " << _game.player.playerStats.getSecondary() << "!" << endl;
+					/*Sleep(2000);
+					system("CLS");*/
+
+				}
 				break;
 			case 3:
 				//Melee
+				system("CLS");
+				HUD(_game);
+				MachinesHUD(_game);
+				if (_game.machines->MachineStats.getHP() > 0)
+				{
+
+					_game.machines->MachineStats.setHP(_game.player.playerStats.getMeleeDMG() - _game.machines->MachineStats.getHP());
+					cout << "You attacked with your " << _game.player.playerStats.getMelee() << "!" << endl;
+					/*Sleep(2000);
+					system("CLS");*/
+
+				}
 				break;
 			case 4:
 				//Special
@@ -384,50 +521,78 @@ void BattleState(Game &_game)
 			if (_game.machines->MachineStats.getHP() >= 0)
 			{
 				isGoing = false;
+				cout << "You beat " << _game.machines->MachineStats.getName() << "!" << endl;
 			}
 		}
 		
 	
 };
 
+void ProgressCheck10(Game& _game)
+{
+	if (_game.player.playerStats.getXP() < 10 && (posX >= 20 && posY >= 20) /*|| _game.player.playerStats.getXP() < 10 && (posX = -20 && posY = -20)*/)
+	{
+		cout << "Administrator: You can't go there yet! Go get some more australium!" << endl;
+		posX = 20;
+		posY = 20;
+		//Getting a warning in this part, telling me that I should use == instead but
+		//that isn't changing the actual value when i use it. - 30.04.2022
+		
+	}
+}
+
+void WelcomingMessage()
+{
+	cout << "This game is not affiliated with VALVE Software." << endl;
+	Sleep(3000);
+	cout << "This game is a simple fan-game for an university project made by Nitrohedge21." << endl;
+	Sleep(3000);
+	system("CLS");
+	
+
+}
+void Story()
+{
+	cout << "It's a normal day in 2fort as normal as it can be on a team based hat simulator warzone." << endl;
+	Sleep(3000);
+	cout << "You hear an unusual announcement from the Administrator..." << endl;
+	Sleep(3000);
+	cout << "She mentions that both of the teams' intels were stolen." << endl;
+	Sleep(3000);
+	system("CLS");
+	cout << "Administrator: - as I said, you idiots somehow managed to lose your intels to a mysterious figure" << endl;
+	Sleep(3000);
+	cout << "Administrator: Ms. Pauling has suspicions of a certain person who the thief might be." << endl;
+	Sleep(3000);
+	cout << "Ms. Pauling: I've noticed a few screws and oil drips all over the place." << endl;
+	Sleep(3000);
+	cout << "Ms. Pauling: Our cctvs were busted in the process so we can not watch the footage." << endl;
+	Sleep(3000);
+	cout << "Administrator: I'll be contacting Mr. Hale as soon as possible." << endl;
+	Sleep(3000);
+	cout << "Administrator: However, you imbeciles are free to keep fighting or perhaps you would like to go and find the intels by your own..." << endl;
+	cout << "Administrator: *laughs*" << endl;
+	Sleep(3000);
+	cout << "Don't know what to write rn and i'll skip this part for now -30.04.2022" << endl;
+	Sleep(4000);
+	system("CLS");
 
 
+}
 
 int main()
 {
 	
 	Game game;
+	/*WelcomingMessage();
+	Story();*/
 	ClassSelector(game);
-	/*cout << Mercenary::Mercenary().getName() << endl;*/
 	
-	//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
-
-	/*cout << "Name: " << player.playerStats.getName() << endl;
-	cout << "HP: " << player.playerStats.getHP() << endl;
-	cout << "Weapon: " << player.playerStats.getWeapon() << endl;
-	cout << "DMG: " << player.playerStats.getPrimaryDMG() << endl;
-	cout << "XP: " << player.playerStats.getXP() << endl;*/
-	//Player using an array would make no sense, i might be wrong though.
-
-	//cout << "Primary: " << player.primary << endl;	//Trying to get it linked to DMG
-
-
-	/*cout << "Enemy: " << machines[0].MachineStats.getName() << endl;
-	cout << "HP: " << machines[0].MachineStats.getHP() << endl;
-	cout << "Weapon: " << machines[0].MachineStats.getWeapon() << endl;
-	cout << "DMG: " << machines[0].MachineStats.getPrimaryDMG() << endl;*/
-	/*machines[0].name = "";*/
-	//the array range depends on the amount of custom machines i'll make
-
-
-
 	// FUNCTION TESTING AREA (functions are here to be tested)
 	
 
 	while (game.machines->MachineStats.getHP() > 0)
 	{	
-		//This needs some work. The loop is broken but the game in general is fixed.
-		HUD(game);
 		BattleState(game);
 	}
 	
@@ -435,8 +600,9 @@ int main()
 	//The main while loop that keeps the game going
 	while (game.isOver == false /*&& !BattleState*/)
 	{
-		
-		/*HUD(game);*/
+		/*if (isGoing = false)*/
+		//Can't get this to work properly, causes an infinite loop - 30.04.2022
+
 			if (_getch() != NULL)
 			{
 				key_input = _getch();
@@ -479,13 +645,10 @@ int main()
 				}
 				system("CLS");
 				cout << "Your current position of x = " << posX << " and y = " << posY << endl;
-				
-				
+				ProgressCheck10(game);
+
 
 			}
-
-		
-
 		//Gonna put this inside another while loop so that player doesn't move while in the battle.
 		// Did it! I was trying to use while not which was supposed to be used like: "while (!"x state").
 		// ! turns the while loop into while not loop. -16.04.2022
@@ -655,3 +818,44 @@ cout << Mercenary::Mercenary().playerStats.getHP() << endl;*/
 
 //The part below is remains of the madness -23.04.2022 
 //Alexander literally saved my ass and my made day, can't thank him enough.
+
+
+/*cout << Mercenary::Mercenary().getName() << endl;*/
+
+	//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
+
+	/*cout << "Name: " << player.playerStats.getName() << endl;
+	cout << "HP: " << player.playerStats.getHP() << endl;
+	cout << "Weapon: " << player.playerStats.getWeapon() << endl;
+	cout << "DMG: " << player.playerStats.getPrimaryDMG() << endl;
+	cout << "XP: " << player.playerStats.getXP() << endl;*/
+	//Player using an array would make no sense, i might be wrong though.
+
+	//cout << "Primary: " << player.primary << endl;	//Trying to get it linked to DMG
+
+
+	/*cout << "Enemy: " << machines[0].MachineStats.getName() << endl;
+	cout << "HP: " << machines[0].MachineStats.getHP() << endl;
+	cout << "Weapon: " << machines[0].MachineStats.getWeapon() << endl;
+	cout << "DMG: " << machines[0].MachineStats.getPrimaryDMG() << endl;*/
+	/*machines[0].name = "";*/
+	//the array range depends on the amount of custom machines i'll make
+
+// I was wondering why i couldn't access the stats inside the Mercenary Class but i forgot to link them
+
+
+	//Mercenary()
+	//{
+	//	setName("Civilian");
+	//	setHP(75);
+	//	setWeapon("Crowbar");
+	//	setPrimaryDMG(25);
+	//	setXP(0);
+	//	// isEngineer is set to true if the player picks Engineer class
+	//	isEngineer = false;
+	//	sentryHP = 10;
+	//	metal = 0;
+	//};
+
+
+//make a battle hud function?? -23.04.2022
