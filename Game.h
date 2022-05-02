@@ -13,6 +13,9 @@ using namespace std;
 class Game
 {
 public:
+	/*int i;
+	i = 3;*/
+	//Was trying to make it use the integer instead of putting a number inside machines[] -02.05.2022
 	bool isOver;
 	Mercenary player;
 	Machines machines[5];

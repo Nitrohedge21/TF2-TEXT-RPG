@@ -16,6 +16,7 @@ public:
 
 	bool isEngineer;
 	int sentryHP;
+	int sentryDMG;
 	//Not sure if it would be hard but maybe I could add the ability to repair the sentry
 	int metal;
 

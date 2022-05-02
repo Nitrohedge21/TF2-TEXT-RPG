@@ -13,6 +13,7 @@ GlobalStats::GlobalStats()
 	isEngineer = false;
 	sentryHP = 10;
 	metal = 0;
+	sentryDMG = rand() % 15;
 
 	//Default values are being set in here.
 }

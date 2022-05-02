@@ -129,6 +129,7 @@ void ClassSelector(Game &_game)
 			_game.player.playerStats.setXP(0);
 			_game.player.playerStats.isEngineer = true;
 			_game.player.playerStats.sentryHP = 80;
+			_game.player.playerStats.sentryDMG = rand() % 50;
 			_game.player.playerStats.metal = 50;
 			break;
 		case 7:
@@ -231,7 +232,8 @@ void HUD(Game& _game)
 		cout << "Melee DMG: " << _game.player.playerStats.getMeleeDMG() << endl;
 		cout << "Australium: " << _game.player.playerStats.getXP() << endl;
 		cout << "Sentry HP: " << _game.player.playerStats.sentryHP << endl;
-		cout << "Ammo: " << _game.player.playerStats.metal << endl;
+		cout << "Sentry DMG: " << _game.player.playerStats.sentryDMG << endl;
+		cout << "Metal: " << _game.player.playerStats.metal << endl;
 	}
 	
 }
@@ -247,13 +249,9 @@ void MachinesHUD(Game& _game)
 
 void BattleState(Game &_game)
 {
-	isGoing = true;
-
-		/*cout << "Battle Start Message!" << endl;*/
-		/*Sleep(1000);
-		system("CLS");*/
 		while (_game.machines->MachineStats.getHP() > 0)
 		{
+			isGoing = true;
 			HUD(_game);
 			MachinesHUD(_game);
 			cout << "How are you going to attack?" << endl;
@@ -266,16 +264,16 @@ void BattleState(Game &_game)
 				system("CLS");
 				HUD(_game);
 				MachinesHUD(_game);
-				if (_game.machines->MachineStats.getHP() > 0)
-				{
+				//Realized that the "if" statements in the attacking options were a bad idea -02.06.2022
+				
 					
 					_game.machines->MachineStats.setHP(_game.player.playerStats.getPrimaryDMG() - _game.machines->MachineStats.getHP());
 					cout << "You attacked with your " << _game.player.playerStats.getWeapon() << "!" << endl;
-					BattleState(_game);
-					cin >> getChoice;
+					Sleep(2000);
+					system("CLS");
+					
 					//this part still isn't working >:( -30.04.2022
 
-				}
 				
 				break;
 			case 2:
@@ -283,33 +281,44 @@ void BattleState(Game &_game)
 				system("CLS");
 				HUD(_game);
 				MachinesHUD(_game);
-				if (_game.machines->MachineStats.getHP() > 0)
-				{
+				
 
 					_game.machines->MachineStats.setHP(_game.player.playerStats.getSecondaryDMG() - _game.machines->MachineStats.getHP());
 					cout << "You attacked with your " << _game.player.playerStats.getSecondary() << "!" << endl;
-					/*Sleep(2000);
-					system("CLS");*/
+					Sleep(2000);
+					system("CLS");
 
-				}
+				
 				break;
 			case 3:
 				//Melee
 				system("CLS");
 				HUD(_game);
 				MachinesHUD(_game);
-				if (_game.machines->MachineStats.getHP() > 0)
-				{
+				
 
 					_game.machines->MachineStats.setHP(_game.player.playerStats.getMeleeDMG() - _game.machines->MachineStats.getHP());
 					cout << "You attacked with your " << _game.player.playerStats.getMelee() << "!" << endl;
-					/*Sleep(2000);
-					system("CLS");*/
+					Sleep(2000);
+					system("CLS");
 
-				}
+				
 				break;
 			case 4:
 				//Special
+				if (_game.player.playerStats.isEngineer == true)
+				{
+					cout << "You attacked with your sentry!" << endl;
+					_game.player.playerStats.metal = _game.player.playerStats.metal - rand() % 10;
+					_game.machines->MachineStats.setHP(_game.player.playerStats.sentryDMG - _game.machines->MachineStats.getHP());
+					Sleep(2000);
+					system("CLS");
+
+				}
+				else
+				{
+					cout << "you can attack with engineer only atm! sorry :p" << endl;
+				}
 				break;
 			case 5:
 				//Escape
@@ -321,7 +330,7 @@ void BattleState(Game &_game)
 					_game.player.playerStats.setHP(_game.player.playerStats.getHP() - _game.machines->MachineStats.getPrimaryDMG());
 					Sleep(2000);
 					system("CLS");
-					BattleState(_game);
+					
 
 				}
 				else {
@@ -329,21 +338,29 @@ void BattleState(Game &_game)
 					cout << "But at what cost?" << endl;
 					Sleep(2000);
 					system("CLS");
+					cout << "Administrator: You were ALWAYS a disappointment..." << endl;
 				}
+				/*isGoing = false;*/
+				break;
 
-				cout << "Administrator: You were ALWAYS a disappointment..." << endl;
+				
 			default:
 				break;
 			}
 			if (_game.machines->MachineStats.getHP() >= 0)
 			{
-				isGoing = false;
+				isGoing == false;
 				cout << "You beat " << _game.machines->MachineStats.getName() << "!" << endl;
+				_game.player.playerStats.setXP(rand() % 10);
+				//Actually wanted it to be like %10 of the enemy's overall HP. - 02.05.2022
 				/*cout << "You won " << rand() % 10 - 20 << " australium from that battle!" << endl;*/
 				//Not sure about the part above, gonna ask charlie in the workshop. -30.04.2022
 			}
+			else
+			{
+				BattleState(_game);
+			}
 		}
-		
 	
 };
 
@@ -409,21 +426,9 @@ int main()
 	
 	// FUNCTION TESTING AREA (functions are here to be tested)
 	
-	if (movement_counter > 5)
-	{
-		//Randomizer to make it so that player is able to encounter enemies after a few moves.
-		//Not really familiar with rand, gonna need help. -30.04.2022
-	}
-	/*BattleState(game);*/
-
-	/*while (game.machines[0].MachineStats.getHP() > 0)
-	{	
-		BattleState(game);
-	}*/
-	 // Seriously don't even know what I was thinking when I wrote the part above. 30.04.2022
 
 	//The main while loop that keeps the game going
-	while (game.isOver == false /*&& !BattleState*/)
+	while (game.isOver == false || isGoing == false)
 	{
 		/*if (isGoing = false)*/
 		//Can't get this to work properly, causes an infinite loop - 30.04.2022
@@ -468,6 +473,22 @@ int main()
 					break;
 
 				}
+
+				if (movement_counter >= 6)
+				{
+					movement_counter = 0;
+					cout << "Looks like we have a challenger!" << endl;
+					Sleep(3000);
+					system("CLS");
+					BattleState(game);
+					//Need to find a way to make it reset the HP of the enemy after the battlestate funcion ends
+					/*game.machines->MachineStats.setHP(Machines(_HP));*/
+
+					/*srand(BattleState(game));*/
+					//Randomizer to make it so that player is able to encounter enemies after a few moves.
+					//Not really familiar with rand or srand, gonna need help. -30.04.2022
+				}
+
 				system("CLS");
 				HUD(game);
 				cout << "Your current position of x = " << posX << " and y = " << posY << endl;
@@ -484,14 +505,11 @@ int main()
 		//Game loop will be here
 
 		//Testing something
-		if (posX == 69)
+		if (posX == 69 || posX == 420 || posY == 69 || posY == 420)
 		{
 			cout << "the funny number" << endl;
 			/*BattleState();*/
 		}
-
-	   /*player.setHP(0);*/
-	   //Tested the isDead function by setting the player's HP to 0.
 
 		if (game.player.playerStats.getHP() <= 0)
 		{
@@ -503,6 +521,10 @@ int main()
 	};
 }
 
+//Testing stuff
+
+/*player.setHP(0);*/
+//Tested the isDead function by setting the player's HP to 0.
 
 //CUT STUFF
 
@@ -618,12 +640,12 @@ Mercenary player;
 Machines machines[20];*/
 
 //	playerStats.setWeapon("Scattergun");
-		//	playerStats.setPrimaryDMG(40);
-		//	playerStats.setXP(0);
+//	playerStats.setPrimaryDMG(40);
+//	playerStats.setXP(0);
 
-			/*cout << Game().player.playerStats.getHP() << endl;
-			Game().player.playerStats.setHP(21481248);
-			cout << Game().player.playerStats.getHP() << endl;*/
+/*cout << Game().player.playerStats.getHP() << endl;
+Game().player.playerStats.setHP(21481248);
+cout << Game().player.playerStats.getHP() << endl;*/
 
 /*cout << Mercenary().playerStats.getHP() << endl;
 Mercenary().playerStats.setHP(312012842);
@@ -639,8 +661,8 @@ cout << Mercenary::Mercenary().playerStats.getHP() << endl;*/
 //cout << _classSelector.player.playerStats.getName();
 
 /*_game.machines.playerStats.setHP(42214);*/
-		//The part above isn't working at all, it might have a logic error.
-		/*cout << "The machine's new hp is: " << Machines().MachineStats.getHP() << endl;*/
+//The part above isn't working at all, it might have a logic error.
+/*cout << "The machine's new hp is: " << Machines().MachineStats.getHP() << endl;*/
 
 //The part below is remains of the madness -23.04.2022 
 //Alexander literally saved my ass and my made day, can't thank him enough.
@@ -648,16 +670,16 @@ cout << Mercenary::Mercenary().playerStats.getHP() << endl;*/
 
 /*cout << Mercenary::Mercenary().getName() << endl;*/
 
-	//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
+//THESE WILL BE MOVED INSIDE THE WHILE LOOP LATER ON. KEEPING THEM HERE TO TEST STUFF AND ETC
 
 	/*cout << "Name: " << player.playerStats.getName() << endl;
 	cout << "HP: " << player.playerStats.getHP() << endl;
 	cout << "Weapon: " << player.playerStats.getWeapon() << endl;
 	cout << "DMG: " << player.playerStats.getPrimaryDMG() << endl;
 	cout << "XP: " << player.playerStats.getXP() << endl;*/
-	//Player using an array would make no sense, i might be wrong though.
+//Player using an array would make no sense, i might be wrong though.
 
-	//cout << "Primary: " << player.primary << endl;	//Trying to get it linked to DMG
+//cout << "Primary: " << player.primary << endl;	//Trying to get it linked to DMG
 
 
 	/*cout << "Enemy: " << machines[0].MachineStats.getName() << endl;
@@ -685,3 +707,9 @@ cout << Mercenary::Mercenary().playerStats.getHP() << endl;*/
 
 
 //make a battle hud function?? -23.04.2022
+
+/*while (game.machines[0].MachineStats.getHP() > 0)
+	{
+		BattleState(game);
+	}*/
+// Seriously don't even know what I was thinking when I wrote the part above. 30.04.2022
