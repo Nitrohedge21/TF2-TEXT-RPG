@@ -3,7 +3,7 @@
 #include <iostream>
 #include <time.h>
 #include <conio.h> //This one is used for the movement stuff
-#include "GlobalStats.h"
+//#include "GlobalStats.h"
 #include "Mercenary.h"
 #include "Machines.h"
 #include "Game.h"
@@ -22,6 +22,8 @@ int getChoice;
 int _classChoice;
 string _YouSure;
 bool isGoing;
+
+int randomnumber = 0;
 
 void isDead(void)
 {
@@ -48,131 +50,133 @@ void ClassSelector(Game &_game)
 			cout << "You will now spawn as Scout." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.playerStats.setName("Scout");
-			_game.player.playerStats.setHP(125);
-			_game.player.playerStats.setWeapon("Scattergun");
-			_game.player.playerStats.setPrimaryDMG(25);
-			_game.player.playerStats.setSecondary("Pistol");
-			_game.player.playerStats.setSecondaryDMG(20);
-			_game.player.playerStats.setMelee("Bat");
-			_game.player.playerStats.setMeleeDMG(5);
-			_game.player.playerStats.setXP(0);
+			_game.player.name = "Scout";
+			_game.player.HP = 125;
+			_game.player.weapon = "Scattergun";
+			_game.player.PrimaryDMG = 25;
+			_game.player.secondary = "pistol";
+			_game.player.SecondaryDMG = 20;
+			_game.player.melee = "Bat";
+			_game.player.MeleeDMG = 5;
+			_game.player.XP = 0;
 			break;
 		case 2:
 			cout << "You will now spawn as Soldier." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.playerStats.setName("Soldier");
-			_game.player.playerStats.setHP(200);
-			_game.player.playerStats.setWeapon("Rocket Launcher");
-			_game.player.playerStats.setPrimaryDMG(40);
-			_game.player.playerStats.setSecondary("Shotgun");
-			_game.player.playerStats.setSecondaryDMG(20);
-			_game.player.playerStats.setMelee("Shovel");
-			_game.player.playerStats.setMeleeDMG(10);
-			_game.player.playerStats.setXP(0);
+			_game.player.name = "Soldier";
+			_game.player.HP = 200;
+			_game.player.weapon = "Rocket Launcher";
+			_game.player.PrimaryDMG = 40;
+			_game.player.secondary = "Shotgun";
+			_game.player.SecondaryDMG = 20;
+			_game.player.melee = "Shovel";
+			_game.player.MeleeDMG = 10;
+			_game.player.XP = 0;
 			break;
 		case 3:
 			cout << "You will now spawn as Pyro." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.playerStats.setName("Pyro");
-			_game.player.playerStats.setHP(175);
-			_game.player.playerStats.setWeapon("Flamethrower");
-			_game.player.playerStats.setPrimaryDMG(40);
-			_game.player.playerStats.setSecondary("Shotgun");
-			_game.player.playerStats.setSecondaryDMG(20);
-			_game.player.playerStats.setMelee("Fireaxe");
-			_game.player.playerStats.setMeleeDMG(8);
-			_game.player.playerStats.setXP(0);
+			_game.player.name = "Pyro";
+			_game.player.HP = 175;
+			_game.player.weapon = "Flamethrower";
+			_game.player.PrimaryDMG = 40;
+			_game.player.secondary = "Shotgun";
+			_game.player.SecondaryDMG = 20;
+			_game.player.melee = "Fireaxe";
+			_game.player.MeleeDMG = 8;
+			_game.player.XP = 0;
 			break;
 		case 4:
 			cout << "You will now spawn as Demoman." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.playerStats.setName("Demoman");
-			_game.player.playerStats.setHP(175);
-			_game.player.playerStats.setWeapon("Grenade Launcher");
-			_game.player.playerStats.setPrimaryDMG(40);
-			_game.player.playerStats.setSecondary("Stickybomb Launcher");
-			_game.player.playerStats.setSecondaryDMG(20);
-			_game.player.playerStats.setMelee("Bottle");
-			_game.player.playerStats.setMeleeDMG(9);
-			_game.player.playerStats.setXP(0);
+			_game.player.name = "Demoman";
+			_game.player.HP = 175;
+			_game.player.weapon = "Grenade Launcher";
+			_game.player.PrimaryDMG = 40;
+			_game.player.secondary = "Stickybomb Launcher";
+			_game.player.SecondaryDMG = 20;
+			_game.player.melee = "Bottle";
+			_game.player.MeleeDMG = 9;
+			_game.player.XP = 0;
 			break;
 		case 5:
 			cout << "You will now spawn as Heavy." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.playerStats.setName("Heavy");
-			_game.player.playerStats.setHP(175);
-			_game.player.playerStats.setWeapon("Minigun");
-			_game.player.playerStats.setPrimaryDMG(40);
-			_game.player.playerStats.setSecondary("Shotgun");
-			_game.player.playerStats.setSecondaryDMG(20);
-			_game.player.playerStats.setMelee("Fist");
-			_game.player.playerStats.setMeleeDMG(13);
-			_game.player.playerStats.setXP(0);
+			_game.player.name = "Heavy";
+			_game.player.HP = 300;
+			_game.player.weapon = "Minigun";
+			_game.player.PrimaryDMG = 40;
+			_game.player.secondary = "Shotgun";
+			_game.player.SecondaryDMG = 20;
+			_game.player.melee = "Fist";
+			_game.player.MeleeDMG = 13;
+			_game.player.XP = 0;
 			break;
 		case 6:
 			cout << "You will now spawn as Engineer." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.playerStats.setName("Engineer");
-			_game.player.playerStats.setHP(125);
-			_game.player.playerStats.setWeapon("Shotgun");
-			_game.player.playerStats.setPrimaryDMG(23);
+			_game.player.name = "Engineer";
+			_game.player.HP = 125;
+			_game.player.weapon = "Shotgun";
+			_game.player.PrimaryDMG = 23;
 			//Engineer shouldn't have that many attacks, he has sentry already.
 			//So i won't be adding secondary to him. -30.04.2022
-			_game.player.playerStats.setMelee("Wrench");
-			_game.player.playerStats.setMeleeDMG(8);
-			_game.player.playerStats.setXP(0);
-			_game.player.playerStats.isEngineer = true;
-			_game.player.playerStats.sentryHP = 80;
-			_game.player.playerStats.sentryDMG = rand() % 50;
-			_game.player.playerStats.metal = 50;
+			_game.player.melee = "Wrench";
+			_game.player.MeleeDMG = 8;
+			_game.player.XP = 0;
+			_game.player.isEngineer = true;
+			_game.player.sentryHP = 80;
+			_game.player.sentryDMG = rand() % 50;
+			_game.player.metal = 50;
 			break;
 		case 7:
 			cout << "You will now spawn as Medic." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.playerStats.setName("Medic");
-			_game.player.playerStats.setHP(150);
-			_game.player.playerStats.setWeapon("Syringe Gun");
-			_game.player.playerStats.setPrimaryDMG(40);
-			//Honestly don't know what to do for medic's secondary.
-			_game.player.playerStats.setMelee("Bonesaw");
-			_game.player.playerStats.setMeleeDMG(7);
-			_game.player.playerStats.setXP(0);
+			_game.player.name = "Medic";
+			_game.player.HP = 150;
+			_game.player.weapon = "Syringe GUn";
+			_game.player.PrimaryDMG = 40;
+			_game.player.secondary = "Shotgun";
+			_game.player.SecondaryDMG = 20;
+			_game.player.melee = "Bonesaw";
+			_game.player.MeleeDMG = 7;
+			_game.player.XP = 0;
 			break;
 		case 8:
 			cout << "You will now spawn as Sniper." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.playerStats.setName("Sniper");
-			_game.player.playerStats.setHP(125);
-			_game.player.playerStats.setWeapon("Sniper Rifle");
-			_game.player.playerStats.setPrimaryDMG(40);
-			_game.player.playerStats.setSecondary("SMG");
-			_game.player.playerStats.setSecondaryDMG(20);
-			_game.player.playerStats.setMelee("Kukri");
-			_game.player.playerStats.setMeleeDMG(8);
-			_game.player.playerStats.setXP(0);
+			_game.player.name = "Sniper";
+			_game.player.HP = 125;
+			_game.player.weapon = "Sniper Rifle";
+			_game.player.PrimaryDMG = 40;
+			_game.player.secondary = "SMG";
+			_game.player.SecondaryDMG = 20;
+			_game.player.melee = "Kukri";
+			_game.player.MeleeDMG = 8;
+			_game.player.XP = 0;
 			break;
 		case 9:
 			cout << "You will now spawn as Spy." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.playerStats.setName("Spy");
-			_game.player.playerStats.setHP(125);
-			_game.player.playerStats.setWeapon("Revolver");
-			_game.player.playerStats.setPrimaryDMG(40);
-			_game.player.playerStats.setSecondary("Sapper");
-			_game.player.playerStats.setSecondaryDMG(10);
+			_game.player.name = "Spy";
+			_game.player.HP = 125;
+			_game.player.weapon = "Revolver";
+			_game.player.PrimaryDMG = 40;
+			_game.player.secondary = "Sapper";
+			_game.player.SecondaryDMG = 10;
+			_game.player.melee = "Knife";
+			_game.player.MeleeDMG = 12;
+			_game.player.XP = 0;
 			//Thinking about a way to stop the enemy from attacking for a round when this attack is used. -30.04.2022
-			_game.player.playerStats.setMelee("Knife");
-			_game.player.playerStats.setMeleeDMG(12);
-			_game.player.playerStats.setXP(0);
+		
 			break;
 
 		default:
@@ -209,47 +213,51 @@ void ClassSelector(Game &_game)
 
 void HUD(Game& _game)
 {
-	if (_game.player.playerStats.isEngineer == false)
+	if (_game.player.isEngineer == false)
 	{
-		cout << "Name: " << _game.player.playerStats.getName() << endl;
-		cout << "HP: " << _game.player.playerStats.getHP() << endl;
-		cout << "Weapon: " << _game.player.playerStats.getWeapon() << endl;
-		cout << "Primary DMG: " << _game.player.playerStats.getPrimaryDMG() << endl;
-		cout << "Secondary: " << _game.player.playerStats.getSecondary() << endl;
-		cout << "Secondary DMG: " << _game.player.playerStats.getSecondaryDMG() << endl;
-		cout << "Melee: " << _game.player.playerStats.getMelee() << endl;
-		cout << "Melee DMG: " << _game.player.playerStats.getMeleeDMG() << endl;
-		cout << "Australium: " << _game.player.playerStats.getXP() << endl;
+		cout << "Name: " << _game.player.name << endl;
+		cout << "HP: " << _game.player.HP << endl;
+		cout << "Weapon: " << _game.player.weapon << endl;
+		cout << "Primary DMG: " << _game.player.PrimaryDMG << endl;
+		cout << "Secondary: " << _game.player.secondary << endl;
+		cout << "Secondary DMG: " << _game.player.SecondaryDMG << endl;
+		cout << "Melee: " << _game.player.melee << endl;
+		cout << "Melee DMG: " << _game.player.MeleeDMG << endl;
+		cout << "Australium: " << _game.player.XP << endl;
 	}
 	
 	else
 	{
-		cout << "Name: " << _game.player.playerStats.getName() << endl;
-		cout << "HP: " << _game.player.playerStats.getHP() << endl;
-		cout << "Weapon: " << _game.player.playerStats.getWeapon() << endl;
-		cout << "Primary DMG: " << _game.player.playerStats.getPrimaryDMG() << endl;
-		cout << "Melee: " << _game.player.playerStats.getMelee() << endl;
-		cout << "Melee DMG: " << _game.player.playerStats.getMeleeDMG() << endl;
-		cout << "Australium: " << _game.player.playerStats.getXP() << endl;
-		cout << "Sentry HP: " << _game.player.playerStats.sentryHP << endl;
-		cout << "Sentry DMG: " << _game.player.playerStats.sentryDMG << endl;
-		cout << "Metal: " << _game.player.playerStats.metal << endl;
+		cout << "Name: " << _game.player.name << endl;
+		cout << "HP: " << _game.player.HP << endl;
+		cout << "Weapon: " << _game.player.weapon << endl;
+		cout << "Primary DMG: " << _game.player.PrimaryDMG << endl;
+		cout << "Melee: " << _game.player.melee << endl;
+		cout << "Melee DMG: " << _game.player.MeleeDMG << endl;
+		cout << "Australium: " << _game.player.XP << endl;
+		cout << "Sentry HP: " << _game.player.sentryHP << endl;
+		cout << "Sentry DMG: " << _game.player.sentryDMG << endl;
+		cout << "Metal: " << _game.player.metal << endl;
 	}
 	
 }
 void MachinesHUD(Game& _game)
 {
 	cout << "=====================" << endl;
-	cout << "Name: " << _game.machines->MachineStats.getName() << endl;
-	cout << "HP: " << _game.machines->MachineStats.getHP() << endl;
-	cout << "Weapon: " << _game.machines->MachineStats.getWeapon() << endl;
-	cout << "Primary DMG: " << _game.machines->MachineStats.getPrimaryDMG() << endl;
+	cout << "Name: " << _game.machines[randomnumber].mname << endl;
+	cout << "HP: " << _game.machines[randomnumber].mHP << endl;
+	cout << "Weapon: " << _game.machines[randomnumber].mweapon << endl;
+	cout << "Primary DMG: " << _game.machines[randomnumber].mprimaryDMG << endl;
 	cout << "=====================" << endl;
 }
 
 void BattleState(Game &_game)
 {
-		while (_game.machines->MachineStats.getHP() > 0)
+	
+	srand(time(NULL));
+	randomnumber = rand() % 5;
+
+		while (_game.machines[randomnumber].mHP > 0)
 		{
 			isGoing = true;
 			HUD(_game);
@@ -267,8 +275,11 @@ void BattleState(Game &_game)
 				//Realized that the "if" statements in the attacking options were a bad idea -02.06.2022
 				
 					
-					_game.machines->MachineStats.setHP(_game.player.playerStats.getPrimaryDMG() - _game.machines->MachineStats.getHP());
-					cout << "You attacked with your " << _game.player.playerStats.getWeapon() << "!" << endl;
+					_game.machines[randomnumber].mHP = _game.machines->mHP - _game.player.PrimaryDMG;
+					cout << "You attacked with your " << _game.player.weapon << "!" << endl;
+					Sleep(2000);
+					cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
+					_game.player.HP = _game.player.HP - _game.machines[randomnumber].mprimaryDMG;
 					Sleep(2000);
 					system("CLS");
 					
@@ -283,8 +294,8 @@ void BattleState(Game &_game)
 				MachinesHUD(_game);
 				
 
-					_game.machines->MachineStats.setHP(_game.player.playerStats.getSecondaryDMG() - _game.machines->MachineStats.getHP());
-					cout << "You attacked with your " << _game.player.playerStats.getSecondary() << "!" << endl;
+					_game.machines->mHP = _game.player.SecondaryDMG - _game.machines->mHP;
+					cout << "You attacked with your " << _game.player.secondary << "!" << endl;
 					Sleep(2000);
 					system("CLS");
 
@@ -297,8 +308,8 @@ void BattleState(Game &_game)
 				MachinesHUD(_game);
 				
 
-					_game.machines->MachineStats.setHP(_game.player.playerStats.getMeleeDMG() - _game.machines->MachineStats.getHP());
-					cout << "You attacked with your " << _game.player.playerStats.getMelee() << "!" << endl;
+					_game.machines->mHP = _game.player.MeleeDMG - _game.machines->mHP;
+					cout << "You attacked with your " << _game.player.melee << "!" << endl;
 					Sleep(2000);
 					system("CLS");
 
@@ -306,11 +317,11 @@ void BattleState(Game &_game)
 				break;
 			case 4:
 				//Special
-				if (_game.player.playerStats.isEngineer == true)
+				if (_game.player.isEngineer == true)
 				{
 					cout << "You attacked with your sentry!" << endl;
-					_game.player.playerStats.metal = _game.player.playerStats.metal - rand() % 10;
-					_game.machines->MachineStats.setHP(_game.player.playerStats.sentryDMG - _game.machines->MachineStats.getHP());
+					_game.player.metal = _game.player.metal - rand() % 10;
+					_game.machines->mHP = _game.player.sentryDMG - _game.machines->mHP;
 					Sleep(2000);
 					system("CLS");
 
@@ -327,7 +338,7 @@ void BattleState(Game &_game)
 					
 					cout << "You couldn't run away!" << endl;
 					cout << "And because of that, your enemy had the chance to attack you in the meantime!" << endl;
-					_game.player.playerStats.setHP(_game.player.playerStats.getHP() - _game.machines->MachineStats.getPrimaryDMG());
+					_game.player.HP = _game.player.HP - _game.machines->mprimaryDMG;
 					Sleep(2000);
 					system("CLS");
 					
@@ -347,18 +358,18 @@ void BattleState(Game &_game)
 			default:
 				break;
 			}
-			if (_game.machines->MachineStats.getHP() >= 0)
+			if (_game.machines[randomnumber].mHP <= 0)
 			{
 				isGoing == false;
-				cout << "You beat " << _game.machines->MachineStats.getName() << "!" << endl;
-				_game.player.playerStats.setXP(rand() % 10);
+				cout << "You beat " << _game.machines[randomnumber].mname << "!" << endl;
+				_game.player.XP = rand() % 10;
 				//Actually wanted it to be like %10 of the enemy's overall HP. - 02.05.2022
 				/*cout << "You won " << rand() % 10 - 20 << " australium from that battle!" << endl;*/
 				//Not sure about the part above, gonna ask charlie in the workshop. -30.04.2022
 			}
 			else
 			{
-				BattleState(_game);
+				
 			}
 		}
 	
@@ -366,7 +377,7 @@ void BattleState(Game &_game)
 
 void ProgressCheck10(Game& _game)
 {
-	if (_game.player.playerStats.getXP() < 10 && (posX >= 20 && posY >= 20) /*|| _game.player.playerStats.getXP() < 10 && (posX = -20 && posY = -20)*/)
+	if (_game.player.XP < 10 && (posX >= 20 && posY >= 20) /*|| _game.player.playerStats.getXP() < 10 && (posX = -20 && posY = -20)*/)
 	{
 		cout << "Administrator: You can't go there yet! Go get some more australium!" << endl;
 		posX = 20;
@@ -511,7 +522,7 @@ int main()
 			/*BattleState();*/
 		}
 
-		if (game.player.playerStats.getHP() <= 0)
+		if (game.player.HP <= 0)
 		{
 			system("CLS");
 			isDead();

@@ -6,15 +6,20 @@
 #include <conio.h> 
 
 using namespace std;
-#include "GlobalStats.h"
+//#include "GlobalStats.h"
 
 class Machines
 {
 public:
-	GlobalStats MachineStats;
+	string mname;
+	int mHP;
+	string mweapon;
+	int mprimaryDMG;
+	/*GlobalStats MachineStats;*/
 	Machines();
 	//Not sure whether if it's a good idea to either add public globalstats or just create a globalstats object inside -18.04.2022
-	Machines(string _name, int _HP, string _weapon, int _damage);
+	
+	Machines(string _mName, int _mHP, string _mWeapon, int _mDamage);
 	
 };
 
