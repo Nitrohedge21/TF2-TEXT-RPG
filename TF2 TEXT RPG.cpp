@@ -12,7 +12,7 @@ using namespace std;
 
 
 //Topic 3 shows the classes, use it for machines' array
-
+int escaped;
 int posX;
 int posY;
 char key_input;
@@ -32,7 +32,7 @@ void isDead(void)
 	//Might rename it to Death Message(?) -07.04.2022
 };
 
-void ClassSelector(Game &_game) 
+void ClassSelector(Game& _game) 
 {
 	cout << "Now..." << endl;
 	Sleep(2000);
@@ -140,7 +140,7 @@ void ClassSelector(Game &_game)
 			system("CLS");
 			_game.player.name = "Medic";
 			_game.player.HP = 150;
-			_game.player.weapon = "Syringe GUn";
+			_game.player.weapon = "Syringe Gun";
 			_game.player.PrimaryDMG = 40;
 			_game.player.secondary = "Shotgun";
 			_game.player.SecondaryDMG = 20;
@@ -213,7 +213,7 @@ void ClassSelector(Game &_game)
 
 void HUD(Game& _game)
 {
-	if (_game.player.isEngineer == false)
+	if (_game.player.isEngineer == false) 
 	{
 		cout << "Name: " << _game.player.name << endl;
 		cout << "HP: " << _game.player.HP << endl;
@@ -223,6 +223,7 @@ void HUD(Game& _game)
 		cout << "Secondary DMG: " << _game.player.SecondaryDMG << endl;
 		cout << "Melee: " << _game.player.melee << endl;
 		cout << "Melee DMG: " << _game.player.MeleeDMG << endl;
+		cout << "Sandwiches: " << _game.player.sandwichCount << endl;
 		cout << "Australium: " << _game.player.XP << endl;
 	}
 	
@@ -234,10 +235,11 @@ void HUD(Game& _game)
 		cout << "Primary DMG: " << _game.player.PrimaryDMG << endl;
 		cout << "Melee: " << _game.player.melee << endl;
 		cout << "Melee DMG: " << _game.player.MeleeDMG << endl;
-		cout << "Australium: " << _game.player.XP << endl;
 		cout << "Sentry HP: " << _game.player.sentryHP << endl;
 		cout << "Sentry DMG: " << _game.player.sentryDMG << endl;
+		cout << "Sandwiches: " << _game.player.sandwichCount << endl;
 		cout << "Metal: " << _game.player.metal << endl;
+		cout << "Australium: " << _game.player.XP << endl;
 	}
 	
 }
@@ -248,136 +250,225 @@ void MachinesHUD(Game& _game)
 	cout << "HP: " << _game.machines[randomnumber].mHP << endl;
 	cout << "Weapon: " << _game.machines[randomnumber].mweapon << endl;
 	cout << "Primary DMG: " << _game.machines[randomnumber].mprimaryDMG << endl;
+	cout << "Melee: " << _game.machines[randomnumber].mMelee << endl;
+	cout << "Melee DMG: " << _game.machines[randomnumber].mMeleeDMG << endl;
 	cout << "=====================" << endl;
 }
 
-void BattleState(Game &_game)
+//void valueRandomizer(void)
+//{
+//	int maxNumber;
+//	int minNumber;
+//	(rand() % (maxNumber - minNumber) + minNumber);
+//}	//This was suggested on discord but I can't think how this could be used in my case.
+//void CheckBattle(Game& _game)
+//{
+//	if (isGoing == false)
+//	{
+//		_game.machines[randomnumber].mHP = 0;
+//	}
+//}
+void BattleState(Game& _game)
 {
-	
+
 	srand(time(NULL));
 	randomnumber = rand() % 5;
+	//if (escaped >= !1)
+	//{
+	//	isGoing = true;
+	//}
+	//else if (escaped = 0)
+	//{
+	//	isGoing = false;
+	//}
+	
+	isGoing = true;
 
-		while (_game.machines[randomnumber].mHP > 0)
+	while (_game.machines[randomnumber].mHP > 0 && isGoing == true)
+	{
+
+		HUD(_game);
+		MachinesHUD(_game);
+		cout << "How are you going to attack?" << endl;
+		cout << "Primary(1), Secondary(2), Melee(3), Heal(4), or perhaps run like a coward(5)." << endl;
+		cin >> getChoice;
+		switch (getChoice)
 		{
-			isGoing = true;
+		case 1:
+			//Primary
+			system("CLS");
 			HUD(_game);
 			MachinesHUD(_game);
-			cout << "How are you going to attack?" << endl;
-			cout << "Primary(1), Secondary(2), Melee(3), Special(4), or perhaps run like a bi-(5)." << endl;
-			cin >> getChoice;
-			switch (getChoice)
+			//Realized that the "if" statements in the attacking options were a bad idea -02.06.2022
+
+			_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.PrimaryDMG;
+			cout << "You attacked with your " << _game.player.weapon << "!" << endl;
+			Sleep(2000);
+			cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
+			_game.player.HP = _game.player.HP - _game.machines[randomnumber].mprimaryDMG;
+			Sleep(2000);
+			system("CLS");
+
+			//this part still isn't working >:( -30.04.2022
+
+
+			break;
+		case 2:
+			//Secondary
+			system("CLS");
+			HUD(_game);
+			MachinesHUD(_game);
+
+			if (_game.player.isEngineer = false)
 			{
-			case 1:
-				//Primary
+				_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.SecondaryDMG;
+				cout << "You attacked with your " << _game.player.secondary << "!" << endl;
+				Sleep(2000);
+				cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
+				_game.player.HP = _game.player.HP - _game.machines[randomnumber].mprimaryDMG;
+				Sleep(2000);
 				system("CLS");
-				HUD(_game);
-				MachinesHUD(_game);
-				//Realized that the "if" statements in the attacking options were a bad idea -02.06.2022
-				
-					
-					_game.machines[randomnumber].mHP = _game.machines->mHP - _game.player.PrimaryDMG;
-					cout << "You attacked with your " << _game.player.weapon << "!" << endl;
-					Sleep(2000);
-					cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
-					_game.player.HP = _game.player.HP - _game.machines[randomnumber].mprimaryDMG;
-					Sleep(2000);
-					system("CLS");
-					
-					//this part still isn't working >:( -30.04.2022
-
-				
-				break;
-			case 2:
-				//Secondary
-				system("CLS");
-				HUD(_game);
-				MachinesHUD(_game);
-				
-
-					_game.machines->mHP = _game.player.SecondaryDMG - _game.machines->mHP;
-					cout << "You attacked with your " << _game.player.secondary << "!" << endl;
-					Sleep(2000);
-					system("CLS");
-
-				
-				break;
-			case 3:
-				//Melee
-				system("CLS");
-				HUD(_game);
-				MachinesHUD(_game);
-				
-
-					_game.machines->mHP = _game.player.MeleeDMG - _game.machines->mHP;
-					cout << "You attacked with your " << _game.player.melee << "!" << endl;
-					Sleep(2000);
-					system("CLS");
-
-				
-				break;
-			case 4:
-				//Special
-				if (_game.player.isEngineer == true)
-				{
-					cout << "You attacked with your sentry!" << endl;
-					_game.player.metal = _game.player.metal - rand() % 10;
-					_game.machines->mHP = _game.player.sentryDMG - _game.machines->mHP;
-					Sleep(2000);
-					system("CLS");
-
-				}
-				else
-				{
-					cout << "you can attack with engineer only atm! sorry :p" << endl;
-				}
-				break;
-			case 5:
-				//Escape
-				if ((rand() % 3) == 1) 
-				{
-					
-					cout << "You couldn't run away!" << endl;
-					cout << "And because of that, your enemy had the chance to attack you in the meantime!" << endl;
-					_game.player.HP = _game.player.HP - _game.machines->mprimaryDMG;
-					Sleep(2000);
-					system("CLS");
-					
-
-				}
-				else {
-					cout << "You escaped succesfully..." << endl;
-					cout << "But at what cost?" << endl;
-					Sleep(2000);
-					system("CLS");
-					cout << "Administrator: You were ALWAYS a disappointment..." << endl;
-				}
-				/*isGoing = false;*/
-				break;
-
-				
-			default:
-				break;
-			}
-			if (_game.machines[randomnumber].mHP <= 0)
-			{
-				isGoing == false;
-				cout << "You beat " << _game.machines[randomnumber].mname << "!" << endl;
-				_game.player.XP = rand() % 10;
-				//Actually wanted it to be like %10 of the enemy's overall HP. - 02.05.2022
-				/*cout << "You won " << rand() % 10 - 20 << " australium from that battle!" << endl;*/
-				//Not sure about the part above, gonna ask charlie in the workshop. -30.04.2022
 			}
 			else
 			{
-				
+				cout << "You attacked with your sentry!" << endl;
+				_game.player.metal = _game.player.metal - rand() % 10;
+				_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.sentryDMG;
+				Sleep(2000);
+				cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
+				_game.player.HP = _game.player.HP - _game.machines[randomnumber].mprimaryDMG;
+				Sleep(2000);
+				system("CLS");
+			}
+
+
+
+			break;
+		case 3:
+			//Melee
+			system("CLS");
+			HUD(_game);
+			MachinesHUD(_game);
+
+
+			_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.MeleeDMG;
+			cout << "You attacked with your " << _game.player.melee << "!" << endl;
+			Sleep(2000);
+
+			if (_game.machines[randomnumber].mname == "Black Box Soldier")
+			{
+				cout << _game.machines[randomnumber].mname << " has stolen some of your HP!" << endl;
+				_game.player.HP = _game.player.HP - rand() % 5; _game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP + rand() % 7;
+				Sleep(2000);
+				system("CLS");
+			}
+			else
+			{
+				cout << "The machine attacks back!" << endl;
+				_game.player.HP = _game.player.HP - _game.machines[randomnumber].mprimaryDMG;
+				Sleep(2000);
+				system("CLS");
+			}
+
+
+			break;
+		case 4:
+			//Special
+
+			if (_game.player.sandwichCount <= 0)
+			{
+				cout << "You have no sandwiches left!" << endl;
+				Sleep(2000);
+				system("CLS");
+
+			}
+			else
+			{
+				cout << "You ate a sandwich and regained some of your HP back." << endl;
+				_game.player.HP = _game.player.HP + rand() % 15 + 5;
+				_game.player.sandwichCount = _game.player.sandwichCount - 1;
+				Sleep(2000);
+				system("CLS");
+			}
+
+			break;
+		case 5:
+			//Escape
+			if ((rand() % 3) == 1)
+			{
+
+				cout << "You couldn't run away!" << endl;
+				cout << "And because of that, your enemy had the chance to attack you in the meantime!" << endl;
+				_game.player.HP = _game.player.HP - _game.machines->mprimaryDMG;
+				Sleep(2000);
+				system("CLS");
+
+
+			}
+			else {
+
+				cout << "You escaped succesfully..." << endl;
+				cout << "But at what cost?" << endl;
+				Sleep(2000);
+				system("CLS");
+				cout << "Administrator: You were ALWAYS a disappointment..." << endl;
+				Sleep(2000);
+				isGoing = false;
+				/*CheckBattle(_game);*/
+			}
+
+			break;
+
+
+
+		default:
+			break;
+		}
+		//Actually wanted it to be like %10 of the enemy's overall HP. - 02.05.2022
+		/*cout << "You won " << rand() % 10 - 20 << " australium from that battle!" << endl;*/
+		//Not sure about the part above, gonna ask charlie in the workshop. -30.04.2022
+		if (_game.machines[randomnumber].mHP <= 0)
+		{
+
+			cout << "You beat " << _game.machines[randomnumber].mname << "!" << endl;
+			_game.player.XP = _game.player.XP + rand() % 10;
+
+			Sleep(2000);
+			if (_game.player.isEngineer = true)
+			{
+				cout << "You collected some metal from the machine's scraps" << endl;
+				_game.player.metal = _game.player.metal + rand() % 15 + 10; // This makes it so that player collects metal in range between 10-15
+				//Totally didn't get the idea from discord :)
+				_game.player.sandwichCount = _game.player.sandwichCount + rand() % 2 + 1;
+				Sleep(3000);
+				system("CLS");
+
+
+			}
+			else
+			{
+				cout << "You found some sandwiches" << endl;
+				_game.player.sandwichCount = _game.player.sandwichCount + rand() % 3 + 1;
+				Sleep(3000);
+				system("CLS");
 			}
 		}
-	
-};
+
+
+	}
+}
+
+//bool checkbattle(Game& _game)
+//{
+//	if (isGoing = false)
+//	{
+//		return true;
+//	}
+//}
 
 void ProgressCheck10(Game& _game)
 {
-	if (_game.player.XP < 10 && (posX >= 20 && posY >= 20) /*|| _game.player.playerStats.getXP() < 10 && (posX = -20 && posY = -20)*/)
+	if (_game.player.XP < 10 && (posX >= 20 && posY >= 20)) /*|| _game.player.playerStats.getXP() < 10 && (posX = -20 && posY = -20)*/
 	{
 		cout << "Administrator: You can't go there yet! Go get some more australium!" << endl;
 		posX = 20;
@@ -385,6 +476,19 @@ void ProgressCheck10(Game& _game)
 		//Getting a warning in this part, telling me that I should use == instead but
 		//that isn't changing the actual value when i use it. - 30.04.2022
 		
+	}
+}
+
+void ProgressCheck30(Game& _game)
+{
+	if (_game.player.XP < 30 && (posX >= 50 && posY >= 50))
+	{
+		cout << "Administrator: You can't go there yet! Go get some more australium!" << endl;
+		posX = 50;
+		posY = 50;
+		//Getting a warning in this part, telling me that I should use == instead but
+		//that isn't changing the actual value when i use it. - 30.04.2022
+
 	}
 }
 
@@ -443,6 +547,7 @@ int main()
 	{
 		/*if (isGoing = false)*/
 		//Can't get this to work properly, causes an infinite loop - 30.04.2022
+		//Don't remember when I fixed it but yes I fixed the issue. -06.05.2022
 
 			if (_getch() != NULL)
 			{
@@ -504,6 +609,7 @@ int main()
 				HUD(game);
 				cout << "Your current position of x = " << posX << " and y = " << posY << endl;
 				ProgressCheck10(game);
+				ProgressCheck30(game);
 
 
 			}

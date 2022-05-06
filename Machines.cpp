@@ -14,7 +14,7 @@ Machines::Machines()
 	
 }
 
-Machines::Machines(string _mName, int _mHP, string _mWeapon, int _mDamage)
+Machines::Machines(string _mName, int _mHP, string _mWeapon, int _mDamage, string _mMelee, int _mMeleeDMG)
 {
 	
 	//This part is really problematic, need to get help asap.
@@ -22,6 +22,8 @@ Machines::Machines(string _mName, int _mHP, string _mWeapon, int _mDamage)
 	mHP = _mHP;
 	mweapon = _mWeapon;
 	mprimaryDMG = _mDamage;
+	mMelee = _mMelee;
+	mMeleeDMG = _mMeleeDMG;
 	
 	//This is the reason why I get the default values on the battlestate, it is causing it to get the default values of global stats.
 	//because the game isn't being referenced

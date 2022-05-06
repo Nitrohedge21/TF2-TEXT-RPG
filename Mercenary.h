@@ -26,6 +26,7 @@ public:
 	int PrimaryDMG;
 	int SecondaryDMG;
 	int MeleeDMG;
+	int sandwichCount;
 
 	Mercenary();
 

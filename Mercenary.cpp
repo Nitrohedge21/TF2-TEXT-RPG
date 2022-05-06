@@ -16,4 +16,5 @@ Mercenary::Mercenary()
 	isEngineer = false;
 	sentryHP = 10;
 	metal = 0;
+	sandwichCount = 0;
 }
