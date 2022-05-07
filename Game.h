@@ -18,7 +18,7 @@ public:
 	//Was trying to make it use the integer instead of putting a number inside machines[] -02.05.2022
 	bool isOver;
 	Mercenary player;
-	Machines machines[5];
+	Machines machines[25];
 
 
 	Game();

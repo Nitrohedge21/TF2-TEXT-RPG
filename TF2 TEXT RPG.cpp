@@ -25,9 +25,35 @@ bool isGoing;
 
 int randomnumber = 0;
 
-void isDead(void)
+void isDead(Game _game)
 {
-	cout << "Death Message" << endl;
+	cout << "You are DEAD,";
+	Sleep(3000);
+	cout << " not a big surprise." << endl;
+	Sleep(3000);
+	system("CLS");
+
+	if (_game.player.getXP() < 10)
+	{
+		cout << "You died with only " << _game.player.getXP() << " australiums?!" << endl;
+		Sleep(3000);
+		cout << "....." << endl;
+		Sleep(3000);
+		cout << "You're a disgrace to the uniform, pal!" << endl;
+		Sleep(3000);
+		system("CLS");
+	}
+	else
+	{
+		cout << "You died with " << _game.player.getXP() << " australiums." << endl;
+		Sleep(3000);
+		cout << "What a waste...." << endl;
+		Sleep(3000);
+		system("CLS");
+	}
+	
+	cout << "Thanks for playing the game! Please let me know if you'd like me to make this an actual thing in the future!" << endl;
+	cout << "-Ersan" << endl;
 	//Will add more when i get more ideas
 	//Might rename it to Death Message(?) -07.04.2022
 };
@@ -50,131 +76,130 @@ void ClassSelector(Game& _game)
 			cout << "You will now spawn as Scout." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.name = "Scout";
-			_game.player.HP = 125;
-			_game.player.weapon = "Scattergun";
-			_game.player.PrimaryDMG = 25;
-			_game.player.secondary = "pistol";
-			_game.player.SecondaryDMG = 20;
-			_game.player.melee = "Bat";
-			_game.player.MeleeDMG = 5;
-			_game.player.XP = 0;
+			_game.player.setName("Scout");
+			_game.player.setHP(125);
+			_game.player.setWeapon("Scattergun");
+			_game.player.setPrimaryDMG(27);
+			_game.player.setSecondary("Pistol");
+			_game.player.setSecondaryDMG(20);
+			_game.player.setMelee("Bat");
+			_game.player.setMeleeDMG(10);
+			_game.player.setXP(0);
 			break;
 		case 2:
 			cout << "You will now spawn as Soldier." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.name = "Soldier";
-			_game.player.HP = 200;
-			_game.player.weapon = "Rocket Launcher";
-			_game.player.PrimaryDMG = 40;
-			_game.player.secondary = "Shotgun";
-			_game.player.SecondaryDMG = 20;
-			_game.player.melee = "Shovel";
-			_game.player.MeleeDMG = 10;
-			_game.player.XP = 0;
+			_game.player.setName("Soldier");
+			_game.player.setHP(200);
+			_game.player.setWeapon("Rocket Launcher");
+			_game.player.setPrimaryDMG(35);
+			_game.player.setSecondary("Shotgun");
+			_game.player.setSecondaryDMG(20);
+			_game.player.setMelee("Shovel");
+			_game.player.setMeleeDMG(12);
+			_game.player.setXP(0);
 			break;
 		case 3:
 			cout << "You will now spawn as Pyro." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.name = "Pyro";
-			_game.player.HP = 175;
-			_game.player.weapon = "Flamethrower";
-			_game.player.PrimaryDMG = 40;
-			_game.player.secondary = "Shotgun";
-			_game.player.SecondaryDMG = 20;
-			_game.player.melee = "Fireaxe";
-			_game.player.MeleeDMG = 8;
-			_game.player.XP = 0;
+			_game.player.setName("Pyro");
+			_game.player.setHP(175);
+			_game.player.setWeapon("Flamethrower");
+			_game.player.setPrimaryDMG(30);
+			_game.player.setSecondary("Shotgun");
+			_game.player.setSecondaryDMG(20);
+			_game.player.setMelee("Fireaxe");
+			_game.player.setMeleeDMG(10);
+			_game.player.setXP(0);
 			break;
 		case 4:
 			cout << "You will now spawn as Demoman." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.name = "Demoman";
-			_game.player.HP = 175;
-			_game.player.weapon = "Grenade Launcher";
-			_game.player.PrimaryDMG = 40;
-			_game.player.secondary = "Stickybomb Launcher";
-			_game.player.SecondaryDMG = 20;
-			_game.player.melee = "Bottle";
-			_game.player.MeleeDMG = 9;
-			_game.player.XP = 0;
+			_game.player.setName("Demoman");
+			_game.player.setHP(175);
+			_game.player.setWeapon("Granade Launcher");
+			_game.player.setPrimaryDMG(35);
+			_game.player.setSecondary("Stickybomb Launcher");
+			_game.player.setSecondaryDMG(20);
+			_game.player.setMelee("Bottle");
+			_game.player.setMeleeDMG(9);
+			_game.player.setXP(0);
 			break;
 		case 5:
 			cout << "You will now spawn as Heavy." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.name = "Heavy";
-			_game.player.HP = 300;
-			_game.player.weapon = "Minigun";
-			_game.player.PrimaryDMG = 40;
-			_game.player.secondary = "Shotgun";
-			_game.player.SecondaryDMG = 20;
-			_game.player.melee = "Fist";
-			_game.player.MeleeDMG = 13;
-			_game.player.XP = 0;
+			_game.player.setName("Heavy");
+			_game.player.setHP(300);
+			_game.player.setWeapon("Minigun");
+			_game.player.setPrimaryDMG(40);
+			_game.player.setSecondary("Shotgun");
+			_game.player.setSecondaryDMG(20);
+			_game.player.setMelee("Fists");
+			_game.player.setMeleeDMG(13);
+			_game.player.setXP(0);
 			break;
 		case 6:
 			cout << "You will now spawn as Engineer." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.name = "Engineer";
-			_game.player.HP = 125;
-			_game.player.weapon = "Shotgun";
-			_game.player.PrimaryDMG = 23;
+			_game.player.setName("Enginer");
+			_game.player.setHP(125);
+			_game.player.setWeapon("Shotgun");
+			_game.player.setPrimaryDMG(25);
 			//Engineer shouldn't have that many attacks, he has sentry already.
 			//So i won't be adding secondary to him. -30.04.2022
-			_game.player.melee = "Wrench";
-			_game.player.MeleeDMG = 8;
-			_game.player.XP = 0;
+			_game.player.setMelee("Wrench");
+			_game.player.setMeleeDMG(8);
+			_game.player.setXP(0);
 			_game.player.isEngineer = true;
 			_game.player.sentryHP = 80;
-			_game.player.sentryDMG = rand() % 50;
+			_game.player.sentryDMG = rand() % 40 + 10;
 			_game.player.metal = 50;
 			break;
 		case 7:
 			cout << "You will now spawn as Medic." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.name = "Medic";
-			_game.player.HP = 150;
-			_game.player.weapon = "Syringe Gun";
-			_game.player.PrimaryDMG = 40;
-			_game.player.secondary = "Shotgun";
-			_game.player.SecondaryDMG = 20;
-			_game.player.melee = "Bonesaw";
-			_game.player.MeleeDMG = 7;
-			_game.player.XP = 0;
+			_game.player.setName("Medic");
+			_game.player.setHP(150);
+			_game.player.setWeapon("Syringe Gun");
+			_game.player.setPrimaryDMG(25);
+			_game.player.setSecondary("Shotgun");
+			_game.player.setSecondaryDMG(15);
+			_game.player.setMelee("Bonesaw");
+			_game.player.setMeleeDMG(7);
+			_game.player.setXP(0);
 			break;
 		case 8:
 			cout << "You will now spawn as Sniper." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.name = "Sniper";
-			_game.player.HP = 125;
-			_game.player.weapon = "Sniper Rifle";
-			_game.player.PrimaryDMG = 40;
-			_game.player.secondary = "SMG";
-			_game.player.SecondaryDMG = 20;
-			_game.player.melee = "Kukri";
-			_game.player.MeleeDMG = 8;
-			_game.player.XP = 0;
-			break;
+			_game.player.setName("Sniper");
+			_game.player.setHP(125);
+			_game.player.setWeapon("Sniper Rifle");
+			_game.player.setPrimaryDMG(35);
+			_game.player.setSecondary("SMG");
+			_game.player.setSecondaryDMG(20);
+			_game.player.setMelee("Kukri");
+			_game.player.setMeleeDMG(8);
+			_game.player.setXP(0);
 		case 9:
 			cout << "You will now spawn as Spy." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.name = "Spy";
-			_game.player.HP = 125;
-			_game.player.weapon = "Revolver";
-			_game.player.PrimaryDMG = 40;
-			_game.player.secondary = "Sapper";
-			_game.player.SecondaryDMG = 10;
-			_game.player.melee = "Knife";
-			_game.player.MeleeDMG = 12;
-			_game.player.XP = 0;
+			_game.player.setName("Spy");
+			_game.player.setHP(125);
+			_game.player.setWeapon("Revolver");
+			_game.player.setPrimaryDMG(30);
+			_game.player.setSecondary("Sapper");
+			_game.player.setSecondaryDMG(10);
+			_game.player.setMelee("Knife");
+			_game.player.setMeleeDMG(12);
+			_game.player.setXP(0);
 			//Thinking about a way to stop the enemy from attacking for a round when this attack is used. -30.04.2022
 		
 			break;
@@ -183,7 +208,7 @@ void ClassSelector(Game& _game)
 			// I feel so dumb, why did i not think of asking for input again omfg -23.04.2022
 			cout << "please choose a class that exists" << endl;
 			// not working at all. 25.04.2022
-			ClassSelector(_game);
+			ClassSelector(_game);	//This part most likely isn't working because of _YouSure.
 			/*ClassSelector();*/
 			//this makes an infinite loop, gonna try to figure out how I can make it not happen -12.04.2022
 			break;
@@ -215,31 +240,31 @@ void HUD(Game& _game)
 {
 	if (_game.player.isEngineer == false) 
 	{
-		cout << "Name: " << _game.player.name << endl;
-		cout << "HP: " << _game.player.HP << endl;
-		cout << "Weapon: " << _game.player.weapon << endl;
-		cout << "Primary DMG: " << _game.player.PrimaryDMG << endl;
-		cout << "Secondary: " << _game.player.secondary << endl;
-		cout << "Secondary DMG: " << _game.player.SecondaryDMG << endl;
-		cout << "Melee: " << _game.player.melee << endl;
-		cout << "Melee DMG: " << _game.player.MeleeDMG << endl;
+		cout << "Name: " << _game.player.getName() << endl;
+		cout << "HP: " << _game.player.getHP() << endl;
+		cout << "Weapon: " << _game.player.getWeapon() << endl;
+		cout << "Primary DMG: " << _game.player.getPrimaryDMG() << endl;
+		cout << "Secondary: " << _game.player.getSecondary() << endl;
+		cout << "Secondary DMG: " << _game.player.getSecondaryDMG() << endl;
+		cout << "Melee: " << _game.player.getMelee() << endl;
+		cout << "Melee DMG: " << _game.player.getMeleeDMG() << endl;
 		cout << "Sandwiches: " << _game.player.sandwichCount << endl;
-		cout << "Australium: " << _game.player.XP << endl;
+		cout << "Australium: " << _game.player.getXP() << endl;
 	}
 	
 	else
 	{
-		cout << "Name: " << _game.player.name << endl;
-		cout << "HP: " << _game.player.HP << endl;
-		cout << "Weapon: " << _game.player.weapon << endl;
-		cout << "Primary DMG: " << _game.player.PrimaryDMG << endl;
-		cout << "Melee: " << _game.player.melee << endl;
-		cout << "Melee DMG: " << _game.player.MeleeDMG << endl;
+		cout << "Name: " << _game.player.getName() << endl;
+		cout << "HP: " << _game.player.getHP() << endl;
+		cout << "Weapon: " << _game.player.getWeapon() << endl;
+		cout << "Primary DMG: " << _game.player.getPrimaryDMG() << endl;
+		cout << "Melee: " << _game.player.getMelee() << endl;
+		cout << "Melee DMG: " << _game.player.getMeleeDMG() << endl;
 		cout << "Sentry HP: " << _game.player.sentryHP << endl;
 		cout << "Sentry DMG: " << _game.player.sentryDMG << endl;
 		cout << "Sandwiches: " << _game.player.sandwichCount << endl;
 		cout << "Metal: " << _game.player.metal << endl;
-		cout << "Australium: " << _game.player.XP << endl;
+		cout << "Australium: " << _game.player.getXP() << endl;
 	}
 	
 }
@@ -272,7 +297,7 @@ void BattleState(Game& _game)
 {
 
 	srand(time(NULL));
-	randomnumber = rand() % 5;
+	randomnumber = rand() % 25;
 	//if (escaped >= !1)
 	//{
 	//	isGoing = true;
@@ -284,7 +309,7 @@ void BattleState(Game& _game)
 	
 	isGoing = true;
 
-	while (_game.machines[randomnumber].mHP > 0 && isGoing == true)
+	while (_game.machines[randomnumber].mHP > 0 && isGoing == true && _game.player.getHP() > 0)
 	{
 
 		HUD(_game);
@@ -301,11 +326,11 @@ void BattleState(Game& _game)
 			MachinesHUD(_game);
 			//Realized that the "if" statements in the attacking options were a bad idea -02.06.2022
 
-			_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.PrimaryDMG;
-			cout << "You attacked with your " << _game.player.weapon << "!" << endl;
+			_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.getPrimaryDMG();
+			cout << "You attacked with your " << _game.player.getWeapon() << "!" << endl;
 			Sleep(2000);
 			cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
-			_game.player.HP = _game.player.HP - _game.machines[randomnumber].mprimaryDMG;
+			_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
 			Sleep(2000);
 			system("CLS");
 
@@ -319,16 +344,17 @@ void BattleState(Game& _game)
 			HUD(_game);
 			MachinesHUD(_game);
 
-			if (_game.player.isEngineer = false)
+			if (_game.player.isEngineer == false)
 			{
-				_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.SecondaryDMG;
-				cout << "You attacked with your " << _game.player.secondary << "!" << endl;
+				_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.getSecondaryDMG();
+				cout << "You attacked with your " << _game.player.getSecondary() << "!" << endl;
 				Sleep(2000);
 				cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
-				_game.player.HP = _game.player.HP - _game.machines[randomnumber].mprimaryDMG;
+				_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
 				Sleep(2000);
 				system("CLS");
 			}
+			//Could have added more unqiue attacks if I had time.
 			else
 			{
 				cout << "You attacked with your sentry!" << endl;
@@ -336,12 +362,12 @@ void BattleState(Game& _game)
 				_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.sentryDMG;
 				Sleep(2000);
 				cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
-				_game.player.HP = _game.player.HP - _game.machines[randomnumber].mprimaryDMG;
+				_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
 				Sleep(2000);
 				system("CLS");
 			}
 
-
+		
 
 			break;
 		case 3:
@@ -351,21 +377,21 @@ void BattleState(Game& _game)
 			MachinesHUD(_game);
 
 
-			_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.MeleeDMG;
-			cout << "You attacked with your " << _game.player.melee << "!" << endl;
+			_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.getMeleeDMG();
+			cout << "You attacked with your " << _game.player.getMelee() << "!" << endl;
 			Sleep(2000);
 
 			if (_game.machines[randomnumber].mname == "Black Box Soldier")
 			{
 				cout << _game.machines[randomnumber].mname << " has stolen some of your HP!" << endl;
-				_game.player.HP = _game.player.HP - rand() % 5; _game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP + rand() % 7;
+				_game.player.setHP(_game.player.getHP() - rand() % 5); _game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP + rand() % 7;
 				Sleep(2000);
 				system("CLS");
 			}
 			else
 			{
 				cout << "The machine attacks back!" << endl;
-				_game.player.HP = _game.player.HP - _game.machines[randomnumber].mprimaryDMG;
+				_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
 				Sleep(2000);
 				system("CLS");
 			}
@@ -385,7 +411,7 @@ void BattleState(Game& _game)
 			else
 			{
 				cout << "You ate a sandwich and regained some of your HP back." << endl;
-				_game.player.HP = _game.player.HP + rand() % 15 + 5;
+				_game.player.setHP(_game.player.getHP() + rand() % 15 + 5);
 				_game.player.sandwichCount = _game.player.sandwichCount - 1;
 				Sleep(2000);
 				system("CLS");
@@ -399,7 +425,7 @@ void BattleState(Game& _game)
 
 				cout << "You couldn't run away!" << endl;
 				cout << "And because of that, your enemy had the chance to attack you in the meantime!" << endl;
-				_game.player.HP = _game.player.HP - _game.machines->mprimaryDMG;
+				_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
 				Sleep(2000);
 				system("CLS");
 
@@ -422,6 +448,9 @@ void BattleState(Game& _game)
 
 
 		default:
+			cout << "Please choose how you're going to attack!" << endl;
+			Sleep(2000);
+			system("CLS");
 			break;
 		}
 		//Actually wanted it to be like %10 of the enemy's overall HP. - 02.05.2022
@@ -431,14 +460,15 @@ void BattleState(Game& _game)
 		{
 
 			cout << "You beat " << _game.machines[randomnumber].mname << "!" << endl;
-			_game.player.XP = _game.player.XP + rand() % 10;
+			_game.player.setXP(_game.player.getXP() + rand() % 10);
 
 			Sleep(2000);
-			if (_game.player.isEngineer = true)
+			if (_game.player.isEngineer == true)
 			{
-				cout << "You collected some metal from the machine's scraps" << endl;
+				cout << "You collected some metal from the machine's scraps." << endl;
 				_game.player.metal = _game.player.metal + rand() % 15 + 10; // This makes it so that player collects metal in range between 10-15
 				//Totally didn't get the idea from discord :)
+				cout << "You also found some sandwiches." << endl;
 				_game.player.sandwichCount = _game.player.sandwichCount + rand() % 2 + 1;
 				Sleep(3000);
 				system("CLS");
@@ -447,7 +477,7 @@ void BattleState(Game& _game)
 			}
 			else
 			{
-				cout << "You found some sandwiches" << endl;
+				cout << "You found some sandwiches." << endl;
 				_game.player.sandwichCount = _game.player.sandwichCount + rand() % 3 + 1;
 				Sleep(3000);
 				system("CLS");
@@ -468,7 +498,7 @@ void BattleState(Game& _game)
 
 void ProgressCheck10(Game& _game)
 {
-	if (_game.player.XP < 10 && (posX >= 20 && posY >= 20)) /*|| _game.player.playerStats.getXP() < 10 && (posX = -20 && posY = -20)*/
+	if (_game.player.getXP() < 10 && (posX >= 20 && posY >= 20)) /*|| _game.player.playerStats.getXP() < 10 && (posX = -20 && posY = -20)*/
 	{
 		cout << "Administrator: You can't go there yet! Go get some more australium!" << endl;
 		posX = 20;
@@ -481,7 +511,7 @@ void ProgressCheck10(Game& _game)
 
 void ProgressCheck30(Game& _game)
 {
-	if (_game.player.XP < 30 && (posX >= 50 && posY >= 50))
+	if (_game.player.getXP() < 30 && (posX >= 50 && posY >= 50))
 	{
 		cout << "Administrator: You can't go there yet! Go get some more australium!" << endl;
 		posX = 50;
@@ -535,8 +565,8 @@ int main()
 {
 	
 	Game game;
-	/*WelcomingMessage();
-	Story();*/
+	WelcomingMessage();
+	Story();
 	ClassSelector(game);
 	
 	// FUNCTION TESTING AREA (functions are here to be tested)
@@ -628,10 +658,10 @@ int main()
 			/*BattleState();*/
 		}
 
-		if (game.player.HP <= 0)
+		if (game.player.getHP() <= 0)
 		{
 			system("CLS");
-			isDead();
+			isDead(game);
 			game.isOver = true;
 			// When the player's hp goes below 0, Death function is called and etc.
 		}
