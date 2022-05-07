@@ -48,3 +48,10 @@ Sleepy Update
 - Player has one in three chance to escape.
 - Switched machines to arrays because that was what I initially had in mind.
 - Although, the preset machine types are not getting detected for some reason, it copies the default values from GlobalStats.
+
+07.05.2022 
+- Forgot to update this file despite making a lot of commits.
+- Anyways, this is most likely the final push for now.
+- There is currently no ending or goal in the game but it's in a fully playable state with a few minor bugs.
+- Brought back setters and getters for the player.
+- Looking to hopefully remake this in a 2D or 3D perspective.
