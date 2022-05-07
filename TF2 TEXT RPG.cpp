@@ -146,7 +146,7 @@ void ClassSelector(Game& _game)
 			cout << "You will now spawn as Engineer." << endl;
 			Sleep(3000);
 			system("CLS");
-			_game.player.setName("Enginer");
+			_game.player.setName("Engineer");
 			_game.player.setHP(125);
 			_game.player.setWeapon("Shotgun");
 			_game.player.setPrimaryDMG(25);
@@ -187,6 +187,7 @@ void ClassSelector(Game& _game)
 			_game.player.setMelee("Kukri");
 			_game.player.setMeleeDMG(8);
 			_game.player.setXP(0);
+			break;
 		case 9:
 			cout << "You will now spawn as Spy." << endl;
 			Sleep(3000);
@@ -470,6 +471,7 @@ void BattleState(Game& _game)
 				//Totally didn't get the idea from discord :)
 				cout << "You also found some sandwiches." << endl;
 				_game.player.sandwichCount = _game.player.sandwichCount + rand() % 2 + 1;
+				_game.player.setHP(_game.player.getHP() + rand() % 15 + 8);
 				Sleep(3000);
 				system("CLS");
 
@@ -554,10 +556,11 @@ void Story()
 	cout << "Administrator: However, you imbeciles are free to keep fighting or perhaps you would like to go and find the intels by your own..." << endl;
 	cout << "Administrator: *laughs*" << endl;
 	Sleep(3000);
-	cout << "Don't know what to write rn and i'll skip this part for now -30.04.2022" << endl;
+	cout << "*Hey guys, sorry for the story being a bit short but this is still sort of a demo.\n Enjoy the game! -Ersan" << endl;
 	Sleep(4000);
 	system("CLS");
 
+	/*cout << "Don't know what to write rn and i'll skip this part for now -30.04.2022" << endl;*/
 
 }
 
