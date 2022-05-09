@@ -330,10 +330,17 @@ void BattleState(Game& _game)
 			_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.getPrimaryDMG();
 			cout << "You attacked with your " << _game.player.getWeapon() << "!" << endl;
 			Sleep(2000);
-			cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
-			_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
-			Sleep(2000);
-			system("CLS");
+			if (_game.machines[randomnumber].mHP > 0)
+			{
+				cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
+				_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
+				Sleep(2000);
+				system("CLS");
+			}
+			else
+			{
+				system("CLS");
+			}
 
 			//this part still isn't working >:( -30.04.2022
 
@@ -350,22 +357,39 @@ void BattleState(Game& _game)
 				_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.getSecondaryDMG();
 				cout << "You attacked with your " << _game.player.getSecondary() << "!" << endl;
 				Sleep(2000);
-				cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
-				_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
-				Sleep(2000);
-				system("CLS");
+				if (_game.machines[randomnumber].mHP > 0)
+				{
+					cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
+					_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
+					Sleep(2000);
+					system("CLS");
+				}
+				else
+				{
+					system("CLS");
+				}
+				
 			}
 			//Could have added more unqiue attacks if I had time.
 			else
 			{
+				
 				cout << "You attacked with your sentry!" << endl;
 				_game.player.metal = _game.player.metal - rand() % 10;
 				_game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP - _game.player.sentryDMG;
 				Sleep(2000);
-				cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
-				_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
-				Sleep(2000);
-				system("CLS");
+				if (_game.machines[randomnumber].mHP > 0)
+				{
+					cout << "The machine attacks with " << _game.machines[randomnumber].mweapon << "!" << endl;
+					_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
+					Sleep(2000);
+					system("CLS");
+				}
+				else
+				{
+					system("CLS");
+				}
+				
 			}
 
 		
@@ -382,20 +406,21 @@ void BattleState(Game& _game)
 			cout << "You attacked with your " << _game.player.getMelee() << "!" << endl;
 			Sleep(2000);
 
-			if (_game.machines[randomnumber].mname == "Black Box Soldier")
+			if (_game.machines[randomnumber].mHP > 0 && _game.machines[randomnumber].mname == "Black Box Soldier")
 			{
 				cout << _game.machines[randomnumber].mname << " has stolen some of your HP!" << endl;
 				_game.player.setHP(_game.player.getHP() - rand() % 5); _game.machines[randomnumber].mHP = _game.machines[randomnumber].mHP + rand() % 7;
 				Sleep(2000);
 				system("CLS");
 			}
-			else
+			else if (_game.machines[randomnumber].mHP > 0)
 			{
 				cout << "The machine attacks back!" << endl;
 				_game.player.setHP(_game.player.getHP() - _game.machines[randomnumber].mprimaryDMG);
 				Sleep(2000);
-				system("CLS");
+				
 			}
+			system("CLS");
 
 
 			break;
